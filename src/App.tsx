@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { CssBaseline, GeistProvider, Themes } from '@geist-ui/react';
+import React, { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import Routes from './routes';
 
 function App() {
+  const darkTheme = Themes.createFromDark({ type: "my_dark" });
+  const lightTheme = Themes.createFromLight({ type: "my_light" });
+  const [themeType] = useState('my_dark')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GeistProvider themeType={themeType} themes={[darkTheme, lightTheme]}>
+      <ThemeProvider theme={themeType === "my_dark" ? darkTheme : lightTheme}>
+        <CssBaseline />
+        <Routes />
+      </ThemeProvider>
+    </GeistProvider>
   );
 }
 
