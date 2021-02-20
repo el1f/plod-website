@@ -1,10 +1,20 @@
 import styled from 'styled-components/macro';
+import Tilt from 'react-parallax-tilt';
+
+export const TiltWrapper = styled(Tilt)`
+  transform-style: preserve-3d;
+  max-width: 320px;
+  width: 100%;
+    margin: 0 auto;
+`;
 
 export const Card = styled.div`
-    margin: 0 auto;
-    max-width: 320px;
+position: relative;
+transform-style: preserve-3d;
+  transform: translateZ(20px);
+    width: 100%;
     background: linear-gradient(135deg, #00ffff 0%, hsl(0, 100%, 47%) 100%);
-    padding: 8px;
+    padding: 12px;
     border-radius: 16px;
         box-sizing: border-box;
 
@@ -20,7 +30,9 @@ export const Content = styled.div`
   background: linear-gradient(0deg, #111 0%, #000000 100%);
   border-radius: 8px;
   overflow: hidden;
-  padding: 40px 16px 32px;
+  padding: 64px 16px 32px;
+  transform: translateZ(8px);
+  transform-style: preserve-3d;
 `;
 
 export const Decoration = styled.div`
@@ -46,9 +58,6 @@ export const Header = styled.div`
 
         * {
             margin: 0;
-        }
-
-        h1 {
         }
     }
 `;
@@ -85,33 +94,13 @@ export const CrewPic = styled.div`
   bottom: -4px; 
   right: -4px;
   border-radius: 50%;
-  box-shadow: 0 0 0 4px black;
+  box-shadow: 0 0 0 4px #060606;
 `;
 
 export const Handles = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
-  grid-row-gap: 12px;
   margin-top: 24px;
-`;
-
-export const HandleChip = styled.div`
-    display: flex;
-`;
-
-export const HandleChipAvatar = styled.div`
-    height: 24px;
-    width: 24px;
-    background-color: ${({ theme }) => theme.palette.foreground};
-    color: ${({ theme }) => theme.palette.background};
-    padding: 4px;
-    border-radius: 50%;
-    margin-right: 12px;
-
-    svg {
-        display: block;
-        height: 16px;
-        width: 16px;
-    }
+  transform: translateZ(16px);
 `;
