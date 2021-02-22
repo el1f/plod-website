@@ -5,7 +5,13 @@ import { Text } from "@geist-ui/react"
 import { FaInstagram, FaDiscord, FaTelegramPlane } from "react-icons/fa" 
 import HandleChip from '../HandleChip'
 
-const ProfileCard = () => {
+interface ProfileCardProps {
+    name: string;
+    photo: string;
+    groups?: string[];
+}
+
+const ProfileCard: React.FC<ProfileCardProps> = ({ name, photo, groups }: ProfileCardProps) => {
     return (
         <TiltWrapper gyroscope={true} scale={1.05} perspective={1000} tiltReverse>
             <Card>
@@ -15,15 +21,15 @@ const ProfileCard = () => {
                     </Decoration>
                     <Header>
                         <PhotoBox>
-                            <Avatar src="https://picsum.photos/320" alt="Profile picture" />
+                            <Avatar src={photo} alt="Profile picture" />
                             <CrewPic>
                                 <Avatar src="https://picsum.photos/80" alt="Profile picture" />
                             </CrewPic>
                         </PhotoBox>
                         <hgroup>
-                            <Text h1 size="1.5rem">Ayoub Aabass</Text>
+                            <Text h1 size="1.5rem">{name}</Text>
                             <Groups>
-                                <Text small>@padova_longboarding</Text>
+                                {groups?.map((group) => <Text key={group} small>{group}</Text>)}
                             </Groups>
                         </hgroup>
                     </Header>

@@ -5,6 +5,7 @@ export const Layout = styled.div`
     height: 100vh;
     grid-template-rows: minmax(32px, 1fr) auto auto minmax(32px, 1fr);
     grid-row-gap: 32px;
+    box-sizing: border-box;
 `;
 
 export const Body = styled.div`
