@@ -1,8 +1,8 @@
 import { Text } from "@geist-ui/react";
 import React from "react";
-import { FaDiscord, FaInstagram, FaTelegramPlane } from "react-icons/fa";
 
 import WhiteLogo from "../../assets/logos/white.svg";
+import { SocialIcons, SupportedSocial } from "../../config/icons";
 import HandleChip from "../HandleChip";
 import {
 	Avatar,
@@ -21,12 +21,23 @@ interface ProfileCardProperties {
 	name: string;
 	photo: string;
 	groups?: string[];
+	mainGroup?: {
+		name: string;
+		logo: string;
+	};
+	links?: {
+		icon: SupportedSocial;
+		handle: string;
+		target: string;
+	}[];
 }
 
 const ProfileCard: React.FC<ProfileCardProperties> = ({
 	name,
 	photo,
 	groups,
+	mainGroup,
+	links,
 }: ProfileCardProperties) => {
 	return (
 		<TiltWrapper gyroscope={true} scale={1.05} perspective={1000} tiltReverse>
@@ -37,10 +48,12 @@ const ProfileCard: React.FC<ProfileCardProperties> = ({
 					</Decoration>
 					<Header>
 						<PhotoBox>
-							<Avatar src={photo} alt="Profile picture" />
-							<CrewPic>
-								<Avatar src="https://picsum.photos/80" alt="Profile picture" />
-							</CrewPic>
+							<Avatar src={photo} />
+							{mainGroup && (
+								<CrewPic>
+									<Avatar src={mainGroup.logo} alt={mainGroup.name} />
+								</CrewPic>
+							)}
 						</PhotoBox>
 						<hgroup>
 							<Text h1 size="1.5rem">
@@ -55,11 +68,18 @@ const ProfileCard: React.FC<ProfileCardProperties> = ({
 							</Groups>
 						</hgroup>
 					</Header>
-					<Handles>
-						<HandleChip icon={<FaTelegramPlane />} value="@el1fudon" href="" />
-						<HandleChip icon={<FaInstagram />} value="@aabassayoub" href="" />
-						<HandleChip icon={<FaDiscord />} value="@el1flem#9577" href="" />
-					</Handles>
+					{links && (
+						<Handles>
+							{links.map((link) => (
+								<HandleChip
+									key={link.target}
+									icon={SocialIcons[link.icon]}
+									value={link.handle}
+									href={link.target}
+								/>
+							))}
+						</Handles>
+					)}
 				</Content>
 			</Card>
 		</TiltWrapper>
