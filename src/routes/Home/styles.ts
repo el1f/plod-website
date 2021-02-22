@@ -21,3 +21,7 @@ export const Body = styled.div`
 		width: 320px;
 	}
 `;
+
+export const AuthForm = styled.form`
+	display: grid;
+`;
