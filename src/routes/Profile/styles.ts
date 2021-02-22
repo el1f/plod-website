@@ -1,22 +1,22 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 export const Layout = styled.div`
-    display: grid;
-    height: 100vh;
-    grid-template-rows: minmax(32px, 1fr) auto auto minmax(32px, 1fr);
-    grid-row-gap: 32px;
-    box-sizing: border-box;
+	box-sizing: border-box;
+	display: grid;
+	grid-row-gap: 32px;
+	grid-template-rows: minmax(32px, 1fr) auto auto minmax(32px, 1fr);
+	height: 100vh;
 `;
 
 export const Body = styled.div`
-  padding: 0 24px;
+	padding: 0 24px;
 `;
 
 export const Actions = styled.div`
-    padding: 0 24px;
-  display: grid;
-  grid-gap: 12px; 
-  max-width: 320px;
-  margin: 0 auto;
-  width: 100%;
+	display: grid;
+	grid-gap: 12px;
+	margin: 0 auto;
+	max-width: 320px;
+	padding: 0 24px;
+	width: 100%;
 `;

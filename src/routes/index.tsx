@@ -1,13 +1,14 @@
-import React from 'react'
-import { BrowserRouter as Router, Route } from "react-router-dom"
-import Profile from './Profile'
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-const Routes = () => {
-    return (
-        <Router>
-            <Route path="/" component={Profile} />
-        </Router>
-    )
-}
+import Profile from "./Profile";
 
-export default Routes
+const Routes: React.FC = () => {
+	return (
+		<Router>
+			<Route path="/" component={Profile} />
+		</Router>
+	);
+};
+
+export default Routes;

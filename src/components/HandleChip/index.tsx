@@ -1,1 +1,1 @@
-export { default } from "./HandleChip"
+export { default } from "./HandleChip";
