@@ -11,6 +11,4 @@ export const SocialIcons = {
 	telegram: <TelegramIcon />,
 } as const;
 
-export type SupportedSocial = "discord" | "instagram" | "telegram";
-
 export { DiscordIcon, InstagramIcon, TelegramIcon };
