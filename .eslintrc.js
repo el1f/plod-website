@@ -24,7 +24,6 @@ module.exports = {
 	extends: [
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
-		"prettier/@typescript-eslint", // Disables rules that conflict between ESlint and Prettier
 		"plugin:compat/recommended", // Lints browser compatibility
 		"plugin:react-hooks/recommended",
 		"plugin:unicorn/recommended",
@@ -45,7 +44,7 @@ module.exports = {
 	],
 
 	rules: {
-		"simple-import-sort/sort": [
+		"simple-import-sort/imports": [
 			"error",
 			{
 				groups: [["^@?\\w"], ["^[^.]"], ["^\\."], ["^\\u0000"]],
