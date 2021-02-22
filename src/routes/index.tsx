@@ -1,16 +1,23 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import RestrictedRoute from "../components/RestrictedRoute";
 import { Home } from "./Home";
 import Profile from "./Profile";
 
 const Routes: React.FC = () => {
 	return (
 		<Router>
-			<Route path="/me" component={Profile} />
-			<Route path="/rider/:alias" component={Profile} />
-			<Route path="/user/:uid" component={Profile} />
-			<Route path="/" component={Home} />
+			<Switch>
+				<RestrictedRoute path="/me" component={Profile} requiresAuth />
+				<RestrictedRoute
+					path="/rider/:alias"
+					component={Profile}
+					requiresAuth
+				/>
+				<RestrictedRoute path="/user/:uid" component={Profile} requiresAuth />
+				<RestrictedRoute path="/" component={Home} requiresGuest />
+			</Switch>
 		</Router>
 	);
 };
