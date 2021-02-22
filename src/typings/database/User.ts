@@ -13,5 +13,5 @@ export interface FirestoreUser {
 		type: SupportedSocial;
 		label: string;
 		target: string;
-	};
+	}[];
 }

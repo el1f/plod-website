@@ -3225,6 +3225,11 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+"@typesaurus/react@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@typesaurus/react/-/react-4.0.1.tgz#1c97b66ebaff177a7565a40febd8fec17ae3cea0"
+  integrity sha512-+YFw7AyabWL5MR8EyncbKVYpMSWsY0V9voUBNK09S/lmtAXR+d0+VxpeOU0uzhIAjbsbujG9fipy5VHvz3gXFQ==
+
 "@typescript-eslint/eslint-plugin@^4.15.0", "@typescript-eslint/eslint-plugin@^4.15.1", "@typescript-eslint/eslint-plugin@^4.5.0":
   version "4.15.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.15.1.tgz#835f64aa0a403e5e9e64c10ceaf8d05c3f015180"
@@ -14487,6 +14492,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typesaurus@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/typesaurus/-/typesaurus-7.1.0.tgz#f030083a201f6e4d02e7f3287bec271d84fba229"
+  integrity sha512-2Az/QN4FprxtT/6Grr3gFb8v6dY1NkSkGvEt6l0b4/cY28p6HmNY/VaZP9p9wQP2GdU8lAbOi+Ip6j1gehCarA==
 
 typescript@^3.9.3:
   version "3.9.9"

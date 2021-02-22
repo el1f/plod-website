@@ -6,7 +6,9 @@ import Profile from "./Profile";
 const Routes: React.FC = () => {
 	return (
 		<Router>
-			<Route path="/" component={Profile} />
+			<Route path="/me" component={Profile} />
+			<Route path="/rider/:alias" component={Profile} />
+			<Route path="/user/:uid" component={Profile} />
 		</Router>
 	);
 };

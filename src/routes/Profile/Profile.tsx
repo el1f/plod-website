@@ -1,26 +1,55 @@
-import { Button } from "@geist-ui/react";
+import { Button, Loading } from "@geist-ui/react";
+import { useGet, useQuery } from "@typesaurus/react";
 import React from "react";
 import { FiDownload, FiShare2 } from "react-icons/fi";
+import { useRouteMatch } from "react-router-dom";
+import { collection, where } from "typesaurus";
 
 import ProfileCard from "../../components/ProfileCard";
+import { auth } from "../../config/firebase";
+import { FirestoreUser } from "../../typings/database/User";
 import { Actions, Body, Layout } from "./styles";
 
+const users = collection<FirestoreUser>("users");
+
 const Profile: React.FC = () => {
+	const meMatch = useRouteMatch("/me");
+	const uidMatch = useRouteMatch<{ uid: string }>("/user/:uid");
+	const aliasMatch = useRouteMatch<{ alias: string }>("/rider/:alias");
+	const useUid = meMatch || uidMatch;
+	const useAlias = Boolean(aliasMatch);
+
+	const uid = (meMatch ? auth.currentUser?.uid : uidMatch?.params.uid) ?? "";
+	const alias = aliasMatch?.params.alias ?? "";
+
+	const [uidUser, { loading: uidLoading, error: uidError }] = useGet(
+		users,
+		uid,
+	);
+	const [
+		aliasUser,
+		{ loading: aliasLoading, error: aliasError },
+	] = useQuery(users, [where("alias", "==", alias)]);
+
+	const user = uidUser?.data || aliasUser?.[0]?.data;
+
+	if ((useUid && uidError) || (useAlias && aliasError) || !user) return null;
+
+	if ((useUid && uidLoading) || (useAlias && aliasLoading)) return <Loading />;
+
 	return (
 		<Layout>
 			<div />
 			<Body>
 				<ProfileCard
-					name="Ayoub Aabass"
-					photo="https://scontent-mxp1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/119656563_783159952226833_6048042685991254373_n.jpg?_nc_ht=scontent-mxp1-1.cdninstagram.com&_nc_cat=101&_nc_ohc=tG7XuYW7TD4AX83nIn3&tp=1&oh=8cfb92232f9584f185fd0fd7e1619c41&oe=6059D964"
-					groups={["@padova_longboarding"]}
-					links={[
-						{
-							icon: "instagram",
-							handle: "@aabassayoub",
-							target: "https://instagram.com/aabassayoub",
-						},
-					]}
+					name={`${user.firstName} ${user.lastName}`}
+					photo={user.photoUrl}
+					groups={user.groups}
+					links={user.links?.map((link) => ({
+						handle: link.label,
+						icon: link.type,
+						target: link.target,
+					}))}
 				/>
 			</Body>
 			<Actions>
