@@ -7,7 +7,7 @@ import {
 	useModal,
 	useToasts,
 } from "@geist-ui/react";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 
 import logo from "../../assets/logos/color.svg";
 import { Navbar } from "../../components/Navbar";
@@ -15,13 +15,15 @@ import { auth } from "../../config/firebase";
 import { AuthForm, Body, Layout } from "./styles";
 
 const Home: React.FC = () => {
-	const [toasts, setToast] = useToasts();
+	const [isSigningIn, setIsSigningIn] = useState(false);
+	const [, setToast] = useToasts();
 	const { setVisible, bindings } = useModal();
 	const { state: email, bindings: emailBindings } = useInput("");
 	const { state: pwd, bindings: pwdBindings } = useInput("");
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
+		setIsSigningIn(true);
 
 		try {
 			await auth.signInWithEmailAndPassword(email, pwd);
@@ -36,6 +38,8 @@ const Home: React.FC = () => {
 				text: "There was an error with your login. Try again",
 			});
 		}
+
+		setIsSigningIn(false);
 	}
 
 	return (
@@ -61,7 +65,12 @@ const Home: React.FC = () => {
 							{...pwdBindings}
 						/>
 						<Spacer y={1} />
-						<Button htmlType="submit" type="secondary" auto>
+						<Button
+							htmlType="submit"
+							type="secondary"
+							loading={isSigningIn}
+							auto
+						>
 							Let me in
 						</Button>
 					</AuthForm>

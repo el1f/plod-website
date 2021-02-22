@@ -1,10 +1,10 @@
-import { Button, Loading } from "@geist-ui/react";
+import { Loading } from "@geist-ui/react";
 import { useGet, useQuery } from "@typesaurus/react";
 import React from "react";
-import { FiDownload, FiShare2 } from "react-icons/fi";
 import { useRouteMatch } from "react-router-dom";
 import { collection, where } from "typesaurus";
 
+import { Navbar } from "../../components/Navbar";
 import ProfileCard from "../../components/ProfileCard";
 import { auth } from "../../config/firebase";
 import { FirestoreUser } from "../../typings/database/User";
@@ -39,6 +39,7 @@ const Profile: React.FC = () => {
 
 	return (
 		<Layout>
+			<Navbar />
 			<div />
 			<Body>
 				<ProfileCard
@@ -53,12 +54,12 @@ const Profile: React.FC = () => {
 				/>
 			</Body>
 			<Actions>
-				<Button size="large" type="secondary" icon={<FiShare2 />}>
+				{/* <Button size="large" type="secondary" icon={<FiShare2 />}>
 					Share
 				</Button>
 				<Button size="large" icon={<FiDownload />}>
 					Download
-				</Button>
+				</Button> */}
 			</Actions>
 			<div />
 		</Layout>
