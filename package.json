@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@geist-ui/react": "^2.1.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -10,9 +11,20 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/styled-components": "^5.1.7",
+    "@typesaurus/react": "^4.0.1",
+    "firebase": "^8.2.8",
+    "polished": "^4.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-firebase-hooks": "^2.2.0",
+    "react-icons": "^4.2.0",
+    "react-parallax-tilt": "^1.4.86",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "styled-components": "^5.2.1",
+    "typesaurus": "^7.1.0",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.3",
@@ -32,7 +44,19 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "yarn eslint ./src --cache --ext .js,.jsx,.ts,.tsx --fix --max-warnings=0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged --debug CI=true test"
+    }
+  },
+  "lint-staged": {
+    "*.{!(*.eslintrc).js,jsx,ts,tsx}": [
+      "npx prettier --write",
+      "yarn lint:staged"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -51,5 +75,26 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "eslint-config-hardcore": "^16.0.2",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-plugin-better-styled-components": "^1.1.2",
+    "eslint-plugin-compat": "^3.9.0",
+    "eslint-plugin-deprecate": "^0.7.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-styled-components-a11y": "^0.0.32",
+    "eslint-plugin-unicorn": "^28.0.2",
+    "husky": "^5.1.0",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "prettier-eslint": "^12.0.0"
   }
 }
