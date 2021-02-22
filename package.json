@@ -18,6 +18,7 @@
     "polished": "^4.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-firebase-hooks": "^2.2.0",
     "react-icons": "^4.2.0",
     "react-parallax-tilt": "^1.4.86",
     "react-router-dom": "^5.2.0",
