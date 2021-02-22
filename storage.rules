@@ -1,6 +1,13 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
+    match /public {
+    	match /{allPaths=**} {
+      	allow read: if true;
+      	allow write: if true;
+      }
+    }
+    
     match /crews {
     	match /{allPaths=**} {
       	allow read: if true;
