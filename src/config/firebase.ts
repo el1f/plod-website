@@ -7,12 +7,13 @@ import "firebase/performance";
 import "firebase/functions";
 
 export const firebaseConfig = {
-	apiKey: "AIzaSyCRnOxK-VTZYxHQzTcdTio3WQ-gcCxHn00",
-	authDomain: "el1flem-bard-novella.firebaseapp.com",
-	projectId: "el1flem-bard-novella",
-	storageBucket: "el1flem-bard-novella.appspot.com",
-	messagingSenderId: "1020208748171",
-	appId: "1:1020208748171:web:d5a70a4b6867d7cb28668e",
+	apiKey: "AIzaSyBVGK80ZevJwLixBVx4Ape0-riOe5L0Yj8",
+	authDomain: "el1flem-pdlb.firebaseapp.com",
+	projectId: "el1flem-pdlb",
+	storageBucket: "el1flem-pdlb.appspot.com",
+	messagingSenderId: "25758978750",
+	appId: "1:25758978750:web:55c30e571828e835f984ef",
+	measurementId: "G-SC18GGE4J7",
 };
 
 if (firebaseCore.apps.length === 0) {
@@ -21,7 +22,6 @@ if (firebaseCore.apps.length === 0) {
 
 export const firebase = firebaseCore;
 export const firestore = firebaseCore.firestore();
-export const storage = firebaseCore.storage();
 export const auth = firebase.auth();
 export const functions = firebase.functions();
 export const analytics = firebase.analytics();
