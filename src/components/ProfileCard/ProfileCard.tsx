@@ -2,7 +2,8 @@ import { Text } from "@geist-ui/react";
 import React from "react";
 
 import WhiteLogo from "../../assets/logos/white.svg";
-import { SocialIcons, SupportedSocial } from "../../config/icons";
+import { SocialIcons } from "../../config/icons";
+import { SupportedSocial } from "../../typings/SupportedSocial";
 import HandleChip from "../HandleChip";
 import {
 	Avatar,
