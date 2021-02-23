@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "el1flem-pdlb"
+  },
+  "targets": {
+    "el1flem-pdlb": {
+      "hosting": {
+        "staging-website": [
+          "staging-el1flem-pdlb"
+        ],
+        "production-website": [
+          "el1flem-pdlb"
+        ]
+      }
+    }
   }
 }
