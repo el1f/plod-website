@@ -20,3 +20,14 @@ export const Actions = styled.div`
 	padding: 0 24px;
 	width: 100%;
 `;
+
+export const SharePanel = styled.div`
+	display: grid;
+`;
+
+export const AvailableSocials = styled.div`
+	display: grid;
+	grid-column-gap: 8px;
+	grid-template-columns: repeat(auto-fit, 40px);
+	margin-bottom: 24px;
+`;
