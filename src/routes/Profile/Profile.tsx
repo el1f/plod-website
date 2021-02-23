@@ -60,6 +60,10 @@ const Profile: React.FC = () => {
 		alias || user.alias
 	}`;
 
+	const shareText = encodeURI("Check my Rider Profile on Padova Longboard!");
+
+	const shareMessage = `${shareText}%0A%0A${sharableUrl}`;
+
 	const shareData = {
 		title: `${user.firstName} ${user.lastName} AKA ${user.alias}`,
 		text: `Padova Longboarding rider profile - Riding for ${user.mainCrew}`,
@@ -126,11 +130,14 @@ const Profile: React.FC = () => {
 				<Modal.Content>
 					<SharePanel>
 						<AvailableSocials>
-							<SocialShareButton social="whatsapp" />
-							<SocialShareButton social="telegram" />
-							<SocialShareButton social="discord" />
-							<SocialShareButton social="instagram" />
-							<SocialShareButton social="facebook" />
+							<SocialShareButton
+								social="whatsapp"
+								target={`https://api.whatsapp.com/send?text=${shareMessage}`}
+							/>
+							<SocialShareButton
+								social="telegram"
+								target={`https://t.me/share/url?url=${sharableUrl}&text=${shareText}`}
+							/>
 						</AvailableSocials>
 						<Input
 							ref={profileFieldReference}
