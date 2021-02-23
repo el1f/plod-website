@@ -45,7 +45,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "yarn eslint ./src --cache --ext .js,.jsx,.ts,.tsx --fix --max-warnings=0"
+    "lint": "yarn eslint ./src --cache --ext .js,.jsx,.ts,.tsx --fix --max-warnings=0",
+    "deploy": "yarn build && firebase deploy --only hosting: production-website",
+    "deploy:staging": "yarn build && firebase deploy --only hosting: staging-website"
   },
   "husky": {
     "hooks": {
