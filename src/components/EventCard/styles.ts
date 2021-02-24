@@ -6,9 +6,8 @@ export const Wrapper = styled.div`
 	border-radius: 24px;
 	display: flex;
 	flex-direction: column;
-	max-width: 384px;
+	min-width: 384px;
 	overflow: visible;
-	width: 100%;
 
 	p {
 		margin: 0;
