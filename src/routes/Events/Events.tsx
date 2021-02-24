@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { Text } from "@geist-ui/react";
+import { Note, Text } from "@geist-ui/react";
 import { formatISO } from "date-fns";
 import React, { useCallback } from "react";
 
@@ -70,6 +70,7 @@ const Events: React.FC = () => {
 		<Layout>
 			<Text h1>Events</Text>
 			<EventsCarousel>
+				{error && <Note type="error">{error.message}</Note>}
 				{loading && (
 					<>
 						<EventCardSkeleton />
