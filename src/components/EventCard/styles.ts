@@ -79,6 +79,9 @@ export const DateDay = styled.div`
 `;
 
 export const Content = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
 	padding: 16px;
 	padding-top: 0;
 `;
@@ -126,8 +129,6 @@ export const PartecipantGroup = styled.div`
 `;
 
 export const Actions = styled.div`
-	margin-top: auto;
-
 	button {
 		//TODO: there has to bea a cleaner way!
 		width: 100% !important;

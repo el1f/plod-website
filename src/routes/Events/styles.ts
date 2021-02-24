@@ -7,6 +7,7 @@ export const Layout = styled.div`
 `;
 
 export const EventsCarousel = styled.div`
+	align-items: flex-start;
 	display: flex;
 
 	& > * {

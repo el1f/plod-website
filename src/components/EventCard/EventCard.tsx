@@ -107,20 +107,22 @@ const EventCard: React.FC<EventCardProperties> = ({
 						/>
 					</PartecipantGroup>
 				)}
-				{partecipants.length > 0 && (
-					<PartecipantGroup>
-						<Description
-							title="PARTECIPANTS"
-							content={
+				<PartecipantGroup>
+					<Description
+						title="PARTECIPANTS"
+						content={
+							partecipants.length > 0 ? (
 								<Avatar.Group count={partecipantsCount}>
 									{partecipants.map(({ name, photo }) => (
 										<Avatar key={name} src={photo} stacked />
 									))}
 								</Avatar.Group>
-							}
-						/>
-					</PartecipantGroup>
-				)}
+							) : (
+								"Nobody"
+							)
+						}
+					/>
+				</PartecipantGroup>
 				<Actions>
 					<Button type="secondary">I&apos;m coming too!</Button>
 				</Actions>
