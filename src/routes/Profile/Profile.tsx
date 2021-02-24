@@ -9,11 +9,10 @@ import {
 	useToasts,
 } from "@geist-ui/react";
 import { useGet, useQuery } from "@typesaurus/react";
-import React, { MouseEvent, useRef } from "react";
+import React, { useRef } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { collection, where } from "typesaurus";
 
-import { Navbar } from "../../components/Navbar";
 import ProfileCard from "../../components/ProfileCard";
 import SocialShareButton from "../../components/SocialShareButton";
 import { auth } from "../../config/firebase";
@@ -92,7 +91,6 @@ const Profile: React.FC = () => {
 
 	return (
 		<Layout>
-			<Navbar />
 			<div />
 			<Body>
 				<ProfileCard
