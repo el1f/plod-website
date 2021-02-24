@@ -126,7 +126,7 @@ export const PartecipantGroup = styled.div`
 `;
 
 export const Actions = styled.div`
-	margin-top: 24px;
+	margin-top: auto;
 
 	button {
 		//TODO: there has to bea a cleaner way!
