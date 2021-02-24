@@ -3,7 +3,7 @@ import { Text } from "@geist-ui/react";
 import { formatISO } from "date-fns";
 import React, { useCallback } from "react";
 
-import EventCard from "../../components/EventCard";
+import EventCard, { EventCardSkeleton } from "../../components/EventCard";
 import {
 	getFutureEvents,
 	getFutureEventsVariables,
@@ -70,6 +70,12 @@ const Events: React.FC = () => {
 		<Layout>
 			<Text h1>Events</Text>
 			<EventsCarousel>
+				{loading && (
+					<>
+						<EventCardSkeleton />
+						<EventCardSkeleton />
+					</>
+				)}
 				{events
 					.filter((event) => Boolean(event.spot))
 					.map((event) => (

@@ -11,6 +11,11 @@ export const Wrapper = styled.div`
 	p {
 		margin: 0;
 	}
+
+	/* Skeletons */
+	.text-row {
+		border-radius: 8px;
+	}
 `;
 
 export const Header = styled.div`
@@ -36,7 +41,8 @@ export const Location = styled.div`
 	overflow: visible;
 	padding: 8px 12px 8px 8px;
 
-	svg {
+	svg,
+	.round-shape {
 		height: 1.25rem;
 		margin-right: 8px;
 		width: 1.25rem;
@@ -48,6 +54,7 @@ export const Date = styled.div`
 	border-radius: 12px;
 	display: flex;
 	height: 100%;
+	min-width: 44px;
 	overflow: visible;
 	padding: 2px;
 `;
@@ -86,6 +93,7 @@ export const Content = styled.div`
 
 export const Cover = styled.div`
 	aspect-ratio: 4 / 3;
+	background-color: ${({ theme }) => theme.palette.accents_2};
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -123,6 +131,10 @@ export const PartecipantGroup = styled.div`
 
 	.avatar-group {
 		padding-left: 0.625rem;
+
+		& > .avatar {
+			background-color: ${({ theme }) => theme.palette.accents_2};
+		}
 	}
 `;
 
