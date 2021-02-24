@@ -1,11 +1,13 @@
 import { gql, useQuery } from "@apollo/client";
 import { Note, Spacer, Text } from "@geist-ui/react";
-import { useQuery as useFirebaseQuery } from "@typesaurus/react";
+import { useOnQuery as useFirebaseQuery } from "@typesaurus/react";
 import { formatISO } from "date-fns";
+import firebase from "firebase";
 import React, { useCallback } from "react";
 import { collection, where } from "typesaurus";
 
 import EventCard, { EventCardSkeleton } from "../../components/EventCard";
+import { auth, firestore } from "../../config/firebase";
 import { FirestoreEventPartecipation } from "../../typings/database/EventPartecipation";
 import {
 	getFutureEvents,
@@ -76,9 +78,31 @@ const Events: React.FC = () => {
 		where("eventId", "in", events ? events.map((event) => event.id) : [""]),
 	]);
 
-	const handlePartecipationClick = useCallback(() => {
-		alert("partecipating!");
-	}, []);
+	const handlePartecipationClick = useCallback(
+		async (eventId: string, isPresent: boolean) => {
+			const user = auth.currentUser;
+			if (!user) return;
+
+			const authUser = await firestore.collection("users").doc(user.uid).get();
+			const profile = await authUser.data();
+
+			firestore
+				.collection("eventPartecipations")
+				.doc(eventId)
+				.set({
+					eventId,
+					presences: firebase.firestore.FieldValue[
+						isPresent ? "arrayRemove" : "arrayUnion"
+					]({
+						userId: user.uid,
+						alias: profile?.alias,
+						name: `${profile?.firstName} ${profile?.lastName}`,
+						photo: profile?.photoUrl,
+					}),
+				});
+		},
+		[],
+	);
 
 	return (
 		<Layout>
@@ -104,13 +128,16 @@ const Events: React.FC = () => {
 								eventPartecipation.data.eventId === event.id,
 						)?.data;
 
-						const partecipantsCount = presence?.count;
 						const partecipantsData = presence?.presences?.map(
 							(partecipant) => ({
 								name: partecipant.name,
 								photo: partecipant.photo,
 							}),
 						);
+						const isPresent =
+							presence?.presences?.some(
+								(partecipant) => partecipant.userId === auth.currentUser?.uid,
+							) ?? false;
 
 						return (
 							<EventCard
@@ -125,8 +152,11 @@ const Events: React.FC = () => {
 									photo: crew.logo.url,
 								}))}
 								partecipants={partecipantsData}
-								partecipantsCount={partecipantsCount}
-								onPartecipationClick={handlePartecipationClick}
+								partecipantsCount={partecipantsData?.length ?? 0}
+								isPresent={isPresent}
+								onPartecipationClick={() =>
+									handlePartecipationClick(event.id, isPresent)
+								}
 							/>
 						);
 					})}

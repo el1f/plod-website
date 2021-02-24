@@ -9,7 +9,7 @@ import {
 	useToasts,
 } from "@geist-ui/react";
 import { useGet, useQuery } from "@typesaurus/react";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { collection, where } from "typesaurus";
 

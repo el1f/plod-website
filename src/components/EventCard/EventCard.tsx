@@ -32,6 +32,7 @@ interface EventCardProperties {
 		photo?: string;
 	}[];
 	partecipantsCount?: number;
+	isPresent?: boolean;
 	onPartecipationClick: () => void;
 }
 
@@ -44,6 +45,7 @@ const EventCard: React.FC<EventCardProperties> = ({
 	hosts = [],
 	partecipants = [],
 	partecipantsCount = 0,
+	isPresent = false,
 	onPartecipationClick,
 }: EventCardProperties) => {
 	const dateObject = parseISO(date);
@@ -127,7 +129,7 @@ const EventCard: React.FC<EventCardProperties> = ({
 				</PartecipantGroup>
 				<Actions>
 					<Button type="secondary" onClick={onPartecipationClick}>
-						I&apos;m coming too!
+						{isPresent ? `I'm not coming anymore!` : `I'm coming too!`}
 					</Button>
 				</Actions>
 			</Content>
