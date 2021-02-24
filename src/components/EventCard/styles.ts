@@ -1,8 +1,7 @@
 import styled from "styled-components/macro";
 
 export const Wrapper = styled.div`
-	background: linear-gradient(0deg, #080808 0%, #131313 100%);
-	border: 2px solid #333;
+	border: 2px solid ${({ theme }) => theme.palette.accents_2};
 	border-radius: 24px;
 	display: flex;
 	flex-direction: column;
@@ -25,7 +24,7 @@ export const Header = styled.div`
 
 export const Location = styled.div`
 	align-items: center;
-	background-color: #333333;
+	background-color: ${({ theme }) => theme.palette.accents_2};
 	border-radius: 12px;
 	box-sizing: border-box;
 	display: flex;
@@ -55,7 +54,7 @@ export const Date = styled.div`
 
 export const DateHour = styled.div`
 	align-items: center;
-	background-color: #131313;
+	background-color: ${({ theme }) => theme.palette.background};
 	border-radius: 10px 0px 0px 10px;
 	display: flex;
 	justify-content: center;
@@ -64,7 +63,7 @@ export const DateHour = styled.div`
 
 export const DateDay = styled.div`
 	align-items: center;
-	background-color: #131313;
+	background-color: ${({ theme }) => theme.palette.background};
 	border-radius: 0px 10px 10px 0px;
 	display: flex;
 	flex-direction: column;
