@@ -68,7 +68,7 @@ const EventCard: React.FC<EventCardProperties> = ({
 			<Header>
 				<Location>
 					<LocationIcon />
-					<Text>{locationName}</Text>
+					<Text span>{locationName}</Text>
 				</Location>
 				<Date>
 					<DateHour>

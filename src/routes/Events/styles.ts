@@ -1,9 +1,20 @@
 import styled from "styled-components/macro";
 
 export const Layout = styled.div`
+	box-sizing: border-box;
 	margin: 0 auto;
 	max-width: 1080px;
+	overflow-x: hidden;
 	width: 100%;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	@media (max-width: 1128px) {
+		padding: 0 24px;
+		max-width: none;
+	}
 `;
 
 export const EventsCarousel = styled.div`
@@ -14,6 +25,14 @@ export const EventsCarousel = styled.div`
 	overflow-x: scroll;
 	padding-bottom: 30px;
 	padding-left: calc((100vw - 1080px) / 2);
+	width: 100%;
+
+	@media (max-width: 1080px) {
+		margin-left: -24px;
+		padding-left: 24px;
+		margin-right: -24px;
+		width: calc(100% + 48px);
+	}
 
 	&::after {
 		content: "-";
@@ -21,6 +40,10 @@ export const EventsCarousel = styled.div`
 		flex-shrink: 0;
 		opacity: 0;
 		width: calc((100vw - 1080px) / 2);
+
+		@media (max-width: 1080px) {
+			width: 0px;
+		}
 	}
 
 	&::-webkit-scrollbar {

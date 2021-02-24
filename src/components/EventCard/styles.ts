@@ -5,8 +5,10 @@ export const Wrapper = styled.div`
 	border-radius: 24px;
 	display: flex;
 	flex-direction: column;
-	min-width: 384px;
+	flex-shrink: 0;
+	max-width: calc(100vw - 48px);
 	overflow: visible;
+	width: 384px;
 
 	p {
 		margin: 0;
@@ -34,18 +36,30 @@ export const Location = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
-	flex-shrink: 0;
+
+	flex-shrink: 1;
 	height: 36px;
 	justify-content: flex-start;
-	margin-right: auto;
 	overflow: visible;
+	overflow: hidden;
 	padding: 8px 12px 8px 8px;
 
 	svg,
 	.round-shape {
+		flex-shrink: 0;
 		height: 1.25rem;
 		margin-right: 8px;
 		width: 1.25rem;
+	}
+
+	span {
+		display: block;
+		flex-basis: 0;
+		flex-grow: 1;
+		flex-shrink: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 `;
 
@@ -53,7 +67,9 @@ export const Date = styled.div`
 	background: linear-gradient(135deg, red 0%, cyan 100%);
 	border-radius: 12px;
 	display: flex;
+	flex-shrink: 0;
 	height: 100%;
+	margin-left: 16px;
 	min-width: 44px;
 	overflow: visible;
 	padding: 2px;
