@@ -29,7 +29,7 @@ interface EventCardProperties {
 	}[];
 	partecipants?: {
 		name: string;
-		photo: string;
+		photo?: string;
 	}[];
 	partecipantsCount?: number;
 	onPartecipationClick: () => void;

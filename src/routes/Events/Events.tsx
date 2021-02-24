@@ -1,14 +1,21 @@
 import { gql, useQuery } from "@apollo/client";
-import { Note, Text } from "@geist-ui/react";
+import { Note, Spacer, Text } from "@geist-ui/react";
+import { useQuery as useFirebaseQuery } from "@typesaurus/react";
 import { formatISO } from "date-fns";
 import React, { useCallback } from "react";
+import { collection, where } from "typesaurus";
 
 import EventCard, { EventCardSkeleton } from "../../components/EventCard";
+import { FirestoreEventPartecipation } from "../../typings/database/EventPartecipation";
 import {
 	getFutureEvents,
 	getFutureEventsVariables,
 } from "./.apollo/getFutureEvents";
 import { EventsCarousel, Layout } from "./styles";
+
+const eventsPartecipations = collection<FirestoreEventPartecipation>(
+	"eventPartecipations",
+);
 
 const Events: React.FC = () => {
 	const { loading, error, data } = useQuery<
@@ -60,18 +67,30 @@ const Events: React.FC = () => {
 		},
 	);
 
+	const events = data?.events ?? [];
+
+	const [
+		eventsPartecipationsData,
+		{ loading: eventsPartecipationsLoading },
+	] = useFirebaseQuery(eventsPartecipations, [
+		where("eventId", "in", events ? events.map((event) => event.id) : [""]),
+	]);
+
 	const handlePartecipationClick = useCallback(() => {
 		alert("partecipating!");
 	}, []);
 
-	const events = data?.events ?? [];
-
 	return (
 		<Layout>
 			<Text h1>Events</Text>
+			{error && (
+				<>
+					<Note type="error">{error.message}</Note>
+					<Spacer y={1} />
+				</>
+			)}
 			<EventsCarousel>
-				{error && <Note type="error">{error.message}</Note>}
-				{loading && (
+				{(loading || eventsPartecipationsLoading) && (
 					<>
 						<EventCardSkeleton />
 						<EventCardSkeleton />
@@ -79,21 +98,38 @@ const Events: React.FC = () => {
 				)}
 				{events
 					.filter((event) => Boolean(event.spot))
-					.map((event) => (
-						<EventCard
-							key={event.id}
-							name={event.name}
-							date={event.date}
-							locationName={event.spot?.name ?? ""} //TODO: remove the elvis
-							categories={event.categories}
-							cover={event.cover?.url}
-							hosts={event.hostCrews.map((crew) => ({
-								name: crew.name,
-								photo: crew.logo.url,
-							}))}
-							onPartecipationClick={handlePartecipationClick}
-						/>
-					))}
+					.map((event) => {
+						const presence = eventsPartecipationsData?.find(
+							(eventPartecipation) =>
+								eventPartecipation.data.eventId === event.id,
+						)?.data;
+
+						const partecipantsCount = presence?.count;
+						const partecipantsData = presence?.presences?.map(
+							(partecipant) => ({
+								name: partecipant.name,
+								photo: partecipant.photo,
+							}),
+						);
+
+						return (
+							<EventCard
+								key={event.id}
+								name={event.name}
+								date={event.date}
+								locationName={event.spot?.name ?? ""} //TODO: remove the elvis
+								categories={event.categories}
+								cover={event.cover?.url}
+								hosts={event.hostCrews.map((crew) => ({
+									name: crew.name,
+									photo: crew.logo.url,
+								}))}
+								partecipants={partecipantsData}
+								partecipantsCount={partecipantsCount}
+								onPartecipationClick={handlePartecipationClick}
+							/>
+						);
+					})}
 			</EventsCarousel>
 		</Layout>
 	);
