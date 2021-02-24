@@ -32,6 +32,7 @@ interface EventCardProperties {
 		photo: string;
 	}[];
 	partecipantsCount?: number;
+	onPartecipationClick: () => void;
 }
 
 const EventCard: React.FC<EventCardProperties> = ({
@@ -43,6 +44,7 @@ const EventCard: React.FC<EventCardProperties> = ({
 	hosts = [],
 	partecipants = [],
 	partecipantsCount = 0,
+	onPartecipationClick,
 }: EventCardProperties) => {
 	const dateObject = parseISO(date);
 	const eventHour = format(dateObject, "HH:mm");
@@ -124,7 +126,9 @@ const EventCard: React.FC<EventCardProperties> = ({
 					/>
 				</PartecipantGroup>
 				<Actions>
-					<Button type="secondary">I&apos;m coming too!</Button>
+					<Button type="secondary" onClick={onPartecipationClick}>
+						I&apos;m coming too!
+					</Button>
 				</Actions>
 			</Content>
 		</Wrapper>

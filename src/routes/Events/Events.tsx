@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { Text } from "@geist-ui/react";
 import { formatISO } from "date-fns";
-import React from "react";
+import React, { useCallback } from "react";
 
 import EventCard from "../../components/EventCard";
 import {
@@ -60,17 +60,16 @@ const Events: React.FC = () => {
 		},
 	);
 
+	const handlePartecipationClick = useCallback(() => {
+		alert("partecipating!");
+	}, []);
+
 	const events = data?.events ?? [];
 
 	return (
 		<Layout>
 			<Text h1>Events</Text>
 			<EventsCarousel>
-				<EventCard
-					name="The testing grounds"
-					date="2021-02-27T13:00:00+00:00"
-					locationName="Prato della valle"
-				/>
 				{events
 					.filter((event) => Boolean(event.spot))
 					.map((event) => (
@@ -85,6 +84,7 @@ const Events: React.FC = () => {
 								name: crew.name,
 								photo: crew.logo.url,
 							}))}
+							onPartecipationClick={handlePartecipationClick}
 						/>
 					))}
 			</EventsCarousel>
