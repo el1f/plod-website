@@ -6,8 +6,12 @@ export const Container = styled.div`
 	grid-auto-flow: column;
 	margin: 0 auto;
 	max-width: 1080px;
-	padding: 0 16px;
 	width: 100%;
+
+	@media (max-width: 1112px) {
+		padding: 0 16px;
+		max-width: none;
+	}
 `;
 
 export const ActionableContent = styled.div`
@@ -20,6 +24,33 @@ export const ActionableContent = styled.div`
 
 		&::before {
 			content: "•";
+		}
+	}
+`;
+
+export const LogoContainer = styled.div`
+	height: 56px;
+	position: relative;
+	width: 56px;
+
+	svg {
+		mix-blend-mode: difference;
+		position: absolute;
+
+		&:first-child {
+			transform: translateX(-2%);
+
+			path {
+				fill: cyan;
+			}
+		}
+
+		&:last-child {
+			transform: translateX(2%);
+
+			path {
+				fill: red;
+			}
 		}
 	}
 `;

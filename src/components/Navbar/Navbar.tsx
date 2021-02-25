@@ -3,9 +3,16 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link as RouterLink } from "react-router-dom";
 
+import { ReactComponent as Logo } from "../../assets/logos/white.svg";
 import { auth } from "../../config/firebase";
 import { DiscordIcon, InstagramIcon } from "../../config/icons";
-import { ActionableContent, Actions, Container, Links } from "./styles";
+import {
+	ActionableContent,
+	Actions,
+	Container,
+	Links,
+	LogoContainer,
+} from "./styles";
 
 interface NavbarProperties {
 	onLoginClick?: () => void;
@@ -22,6 +29,12 @@ const Navbar: React.FC<NavbarProperties> = ({
 
 	return (
 		<Container>
+			<RouterLink to="/">
+				<LogoContainer>
+					<Logo />
+					<Logo />
+				</LogoContainer>
+			</RouterLink>
 			<ActionableContent>
 				<Links>
 					<RouterLink to="/events">Events</RouterLink>
