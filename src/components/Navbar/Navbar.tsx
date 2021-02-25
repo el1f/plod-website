@@ -1,11 +1,14 @@
-import { Button, Link } from "@geist-ui/react";
+import { Avatar, Button, Link, Popover, Text } from "@geist-ui/react";
+import { useGet } from "@typesaurus/react";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link as RouterLink } from "react-router-dom";
+import { collection } from "typesaurus";
 
 import { ReactComponent as Logo } from "../../assets/logos/white.svg";
 import { auth } from "../../config/firebase";
 import { DiscordIcon, InstagramIcon } from "../../config/icons";
+import { FirestoreUser } from "../../typings/database/User";
 import {
 	ActionableContent,
 	Actions,
@@ -18,10 +21,16 @@ interface NavbarProperties {
 	onLoginClick?: () => void;
 }
 
+const users = collection<FirestoreUser>("users");
+
 const Navbar: React.FC<NavbarProperties> = ({
 	onLoginClick,
 }: NavbarProperties) => {
 	const [user, loading] = useAuthState(auth);
+	const [profile, { loading: loadingProfile, error: profileError }] = useGet(
+		users,
+		auth.currentUser?.uid ?? "",
+	);
 
 	function onLogoutClick(): void {
 		auth.signOut();
@@ -48,16 +57,39 @@ const Navbar: React.FC<NavbarProperties> = ({
 					</Link>
 				</Actions>
 				<Actions>
-					<Button
-						size="small"
-						type="secondary"
-						loading={loading}
-						ghost
-						auto
-						onClick={user ? onLogoutClick : onLoginClick}
-					>
-						{user ? "Logout" : "Login"}
-					</Button>
+					{profile ? (
+						<Popover
+							placement="bottomEnd"
+							content={
+								<>
+									<Popover.Item title>
+										<Text
+											span
+										>{`${profile.data.firstName} ${profile.data.lastName}`}</Text>
+									</Popover.Item>
+									<Popover.Item>
+										<Button type="secondary">Logout</Button>
+									</Popover.Item>
+								</>
+							}
+						>
+							<Avatar
+								src={profile.data.photoUrl}
+								text={profile.data.firstName[0]}
+							/>
+						</Popover>
+					) : (
+						<Button
+							size="small"
+							type="secondary"
+							loading={loading}
+							ghost
+							auto
+							onClick={user ? onLogoutClick : onLoginClick}
+						>
+							{user ? "Logout" : "Login"}
+						</Button>
+					)}
 				</Actions>
 			</ActionableContent>
 		</Container>
