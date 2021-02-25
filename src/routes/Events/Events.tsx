@@ -173,6 +173,14 @@ const Events: React.FC = () => {
 								name={event.name}
 								date={event.date}
 								locationName={event.spot?.name ?? ""} //TODO: remove the elvis
+								locationCoords={
+									event.spot?.location
+										? [
+												event.spot.location.latitude,
+												event.spot.location.longitude,
+										  ]
+										: undefined
+								}
 								categories={event.categories}
 								cover={event.cover?.url}
 								hosts={event.hostCrews.map((crew) => ({
