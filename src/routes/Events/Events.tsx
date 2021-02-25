@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { Note, Spacer, Text } from "@geist-ui/react";
+import { Note, Spacer, Text, useToasts } from "@geist-ui/react";
 import { useOnQuery as useFirebaseQuery } from "@typesaurus/react";
 import { formatISO } from "date-fns";
 import firebase from "firebase";
@@ -20,6 +20,8 @@ const eventsPartecipations = collection<FirestoreEventPartecipation>(
 );
 
 const Events: React.FC = () => {
+	const [, setToast] = useToasts();
+
 	const now = useMemo(() => formatISO(new Date()), []);
 
 	const { loading, error, data } = useQuery<
@@ -83,27 +85,47 @@ const Events: React.FC = () => {
 	const handlePartecipationClick = useCallback(
 		async (eventId: string, isPresent: boolean) => {
 			const user = auth.currentUser;
-			if (!user) return;
+			if (!user)
+				return setToast({
+					type: "error",
+					text: `You have to login to be able to check into events!`,
+				});
 
 			const authUser = await firestore.collection("users").doc(user.uid).get();
 			const profile = await authUser.data();
 
-			firestore
-				.collection("eventPartecipations")
-				.doc(eventId)
-				.set({
-					eventId,
-					presences: firebase.firestore.FieldValue[
-						isPresent ? "arrayRemove" : "arrayUnion"
-					]({
-						userId: user.uid,
-						alias: profile?.alias,
-						name: `${profile?.firstName} ${profile?.lastName}`,
-						photo: profile?.photoUrl,
-					}),
+			try {
+				await firestore
+					.collection("eventPartecipations")
+					.doc(eventId)
+					.set({
+						eventId,
+						presences: firebase.firestore.FieldValue[
+							isPresent ? "arrayRemove" : "arrayUnion"
+						]({
+							userId: user.uid,
+							alias: profile?.alias,
+							name: `${profile?.firstName} ${profile?.lastName}`,
+							photo: profile?.photoUrl,
+						}),
+					});
+
+				setToast({
+					type: "success",
+					text: isPresent
+						? "That's a bummer... Hope to see you in the next one!"
+						: "Looking forward to seeing you there rider!",
 				});
+			} catch {
+				setToast({
+					type: "error",
+					text: `There was an error signing you up ${
+						isPresent ? "out of" : "to"
+					} this event. Try again!`,
+				});
+			}
 		},
-		[],
+		[setToast],
 	);
 
 	return (
