@@ -29,18 +29,18 @@ export const Header = styled.div`
 	padding: 16px;
 `;
 
-export const Location = styled.div`
+export const Location = styled.a`
 	align-items: center;
 	background-color: ${({ theme }) => theme.palette.accents_2};
 	border-radius: 12px;
 	box-sizing: border-box;
+	color: inherit;
 	display: flex;
-	flex-direction: row;
 
+	flex-direction: row;
 	flex-shrink: 1;
 	height: 36px;
 	justify-content: flex-start;
-	overflow: visible;
 	overflow: hidden;
 	padding: 8px 12px 8px 8px;
 
@@ -60,6 +60,10 @@ export const Location = styled.div`
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+
+	&:hover {
+		background-color: ${({ theme }) => theme.palette.accents_3};
 	}
 `;
 

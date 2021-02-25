@@ -28,6 +28,7 @@ interface EventCardProperties {
 	name: string;
 	date: string;
 	locationName: string;
+	locationCoords?: [number, number];
 	categories?: string[];
 	cover?: string;
 	hosts?: {
@@ -47,6 +48,7 @@ const EventCard: React.FC<EventCardProperties> = ({
 	name,
 	date,
 	locationName,
+	locationCoords,
 	categories = [],
 	cover,
 	hosts = [],
@@ -75,7 +77,14 @@ const EventCard: React.FC<EventCardProperties> = ({
 	return (
 		<Wrapper>
 			<Header>
-				<Location>
+				<Location
+					href={
+						locationCoords
+							? `https://www.google.com/maps/search/?api=1&query=${locationCoords[0]},${locationCoords[1]}`
+							: ""
+					}
+					target="_blank"
+				>
 					<LocationIcon />
 					<Text span>{locationName}</Text>
 				</Location>
