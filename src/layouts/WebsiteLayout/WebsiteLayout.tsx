@@ -48,9 +48,21 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 		setVisible(false);
 	}
 
+	async function handleLogout() {
+		await auth.signOut();
+
+		setToast({
+			type: "success",
+			text: "Godspeed rider! See you later.",
+		});
+	}
+
 	return (
 		<Layout>
-			<Navbar onLoginClick={() => setVisible(true)} />
+			<Navbar
+				onLoginClick={() => setVisible(true)}
+				onLogoutClick={handleLogout}
+			/>
 			{children}
 
 			<Modal {...bindings}>

@@ -19,22 +19,17 @@ import {
 
 interface NavbarProperties {
 	onLoginClick?: () => void;
+	onLogoutClick?: () => void;
 }
 
 const users = collection<FirestoreUser>("users");
 
 const Navbar: React.FC<NavbarProperties> = ({
 	onLoginClick,
+	onLogoutClick,
 }: NavbarProperties) => {
 	const [user, loading] = useAuthState(auth);
-	const [profile, { loading: loadingProfile, error: profileError }] = useGet(
-		users,
-		auth.currentUser?.uid ?? "",
-	);
-
-	function onLogoutClick(): void {
-		auth.signOut();
-	}
+	const [profile] = useGet(users, auth.currentUser?.uid ?? "");
 
 	return (
 		<Container>
@@ -49,7 +44,10 @@ const Navbar: React.FC<NavbarProperties> = ({
 					<RouterLink to="/events">Events</RouterLink>
 				</Links>
 				<Actions>
-					<Link href="https://discord.gg/bp7ztg4AEz" target="_blank">
+					<Link
+						href="https://www.instagram.com/padova_longboard/"
+						target="_blank"
+					>
 						<InstagramIcon />
 					</Link>
 					<Link href="https://discord.gg/bp7ztg4AEz" target="_blank">
@@ -57,7 +55,7 @@ const Navbar: React.FC<NavbarProperties> = ({
 					</Link>
 				</Actions>
 				<Actions>
-					{profile ? (
+					{user && profile ? (
 						<Popover
 							placement="bottomEnd"
 							content={
@@ -68,7 +66,9 @@ const Navbar: React.FC<NavbarProperties> = ({
 										>{`${profile.data.firstName} ${profile.data.lastName}`}</Text>
 									</Popover.Item>
 									<Popover.Item>
-										<Button type="secondary">Logout</Button>
+										<Button type="secondary" onClick={onLogoutClick}>
+											Logout
+										</Button>
 									</Popover.Item>
 								</>
 							}
@@ -85,9 +85,9 @@ const Navbar: React.FC<NavbarProperties> = ({
 							loading={loading}
 							ghost
 							auto
-							onClick={user ? onLogoutClick : onLoginClick}
+							onClick={onLoginClick}
 						>
-							{user ? "Logout" : "Login"}
+							Login
 						</Button>
 					)}
 				</Actions>
