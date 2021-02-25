@@ -54,7 +54,7 @@
     "lint": "yarn eslint ./src --cache --ext .js,.jsx,.ts,.tsx --fix --max-warnings=0",
     "deploy": "yarn build && firebase deploy --only hosting: production-website",
     "deploy:staging": "yarn build && firebase deploy --only hosting: staging-website",
-    "apollo-gen": "apollo client:codegen .apollo --endpoint=https://api-eu-central-1.graphcms.com/v2/cklj2e27ugicq01yydjxa3t46/master --target=typescript"
+    "apollo-gen": "yarn apollo client:codegen .apollo --endpoint=https://api-eu-central-1.graphcms.com/v2/cklj2e27ugicq01yydjxa3t46/master --target=typescript"
   },
   "husky": {
     "hooks": {
@@ -88,6 +88,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
+    "apollo": "^2.32.5",
     "eslint-config-hardcore": "^16.0.2",
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-better-styled-components": "^1.1.2",

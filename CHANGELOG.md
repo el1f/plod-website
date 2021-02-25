@@ -1,3 +1,7 @@
+## v0.2.1
+
+- **FIX** Missing compilation in the CI
+
 ## v0.2.0
 
 #### 26/02/2021
