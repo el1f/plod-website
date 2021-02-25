@@ -22,6 +22,8 @@ const initUser = functions.auth.user().onCreate(async (user) => {
 			progressive: usersCount + 1,
 			photoUrl: user.photoURL,
 			email: user.email,
+			onboarded: false,
+			verified: false,
 		});
 });
 

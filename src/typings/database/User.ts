@@ -14,4 +14,6 @@ export interface FirestoreUser {
 		label: string;
 		target: string;
 	}[];
+	verified: boolean;
+	onboarded: boolean;
 }

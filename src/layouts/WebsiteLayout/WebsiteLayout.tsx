@@ -20,6 +20,7 @@ export interface WebsiteLayoutProperties {
 const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 	children,
 }: WebsiteLayoutProperties) => {
+	const [isSignin, setIsSignin] = useState(true);
 	const [isSigningIn, setIsSigningIn] = useState(false);
 	const [, setToast] = useToasts();
 	const { setVisible, bindings } = useModal();
@@ -30,18 +31,34 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 		event.preventDefault();
 		setIsSigningIn(true);
 
-		try {
-			await auth.signInWithEmailAndPassword(email, pwd);
+		if (isSignin) {
+			try {
+				await auth.signInWithEmailAndPassword(email, pwd);
 
-			setToast({
-				type: "success",
-				text: "Welcome to the club man",
-			});
-		} catch {
-			setToast({
-				type: "error",
-				text: "There was an error with your login. Try again",
-			});
+				setToast({
+					type: "success",
+					text: "Welcome to the club man",
+				});
+			} catch {
+				setToast({
+					type: "error",
+					text: "There was an error with your login. Try again",
+				});
+			}
+		} else {
+			try {
+				await auth.createUserWithEmailAndPassword(email, pwd);
+
+				setToast({
+					type: "success",
+					text: "Welcome to the club man",
+				});
+			} catch {
+				setToast({
+					type: "error",
+					text: "There was an error creating your account. Try again",
+				});
+			}
 		}
 
 		setIsSigningIn(false);
@@ -66,10 +83,15 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 			{children}
 
 			<Modal {...bindings}>
-				<Modal.Title>Ready to shred.</Modal.Title>
+				<Modal.Title>
+					{isSignin ? "Ready to shred." : "Welcome fella!"}
+				</Modal.Title>
 				<Modal.Subtitle>
-					Welcome home rider. Insert your creds to access
+					{isSignin
+						? "Welcome home rider. Insert your creds to access"
+						: "Time to join the steeziest group of riders in all of Italy!"}
 				</Modal.Subtitle>
+
 				<Spacer y={2} />
 				<Modal.Content>
 					<AuthForm onSubmit={handleSubmit}>
@@ -87,7 +109,11 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 							loading={isSigningIn}
 							auto
 						>
-							Let me in
+							{isSignin ? "Let' go!" : "Let me in!"}
+						</Button>
+						<Spacer y={0.5} />
+						<Button ghost auto onClick={() => setIsSignin(!isSignin)}>
+							{isSignin ? "Create an account" : "I already have an account"}
 						</Button>
 					</AuthForm>
 				</Modal.Content>
