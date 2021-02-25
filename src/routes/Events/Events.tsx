@@ -95,11 +95,15 @@ const Events: React.FC = () => {
 			const profile = await authUser.data();
 
 			try {
+				const currentPartecipationsDocument = await firestore
+					.collection("eventPartecipations")
+					.doc(eventId)
+					.get();
+
 				await firestore
 					.collection("eventPartecipations")
 					.doc(eventId)
-					.set({
-						eventId,
+					[currentPartecipationsDocument ? "update" : "set"]({
 						presences: firebase.firestore.FieldValue[
 							isPresent ? "arrayRemove" : "arrayUnion"
 						]({
