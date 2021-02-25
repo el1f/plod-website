@@ -10,7 +10,7 @@ import {
 } from "@geist-ui/react";
 import { useGet, useQuery } from "@typesaurus/react";
 import React, { useEffect, useRef } from "react";
-import { useRouteMatch } from "react-router-dom";
+import { Redirect, useRouteMatch } from "react-router-dom";
 import { collection, where } from "typesaurus";
 
 import ProfileCard from "../../components/ProfileCard";
@@ -89,6 +89,9 @@ const Profile: React.FC = () => {
 		});
 	}
 
+	if (user && !user.verified && auth.currentUser?.email !== user.email)
+		return <Redirect to="/" />;
+
 	return (
 		<Layout>
 			<div />
@@ -105,14 +108,16 @@ const Profile: React.FC = () => {
 				/>
 			</Body>
 			<Actions>
-				<Button
-					size="large"
-					type="secondary"
-					icon={<ShareIcon />}
-					onClick={() => setVisible(true)}
-				>
-					Share
-				</Button>
+				{user.verified && (
+					<Button
+						size="large"
+						type="secondary"
+						icon={<ShareIcon />}
+						onClick={() => setVisible(true)}
+					>
+						Share
+					</Button>
+				)}
 				{/* <Button size="large" icon={<FiDownload />}>
 					Download
 				</Button> */}
