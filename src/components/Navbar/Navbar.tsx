@@ -75,7 +75,7 @@ const Navbar: React.FC<NavbarProperties> = ({
 						>
 							<Avatar
 								src={profile.data.photoUrl}
-								text={profile.data.firstName[0]}
+								text={profile.data.firstName?.[0]}
 							/>
 						</Popover>
 					) : (

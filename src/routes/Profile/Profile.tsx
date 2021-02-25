@@ -95,7 +95,7 @@ const Profile: React.FC = () => {
 			<Body>
 				<ProfileCard
 					name={`${user.firstName} ${user.lastName}`}
-					photo={user.photoUrl}
+					photo={user.photoUrl ?? ""}
 					groups={user.groups}
 					links={user.links?.map((link) => ({
 						handle: link.label,
