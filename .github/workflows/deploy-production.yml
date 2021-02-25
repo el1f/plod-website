@@ -1,4 +1,4 @@
-name: Staging build
+name: Production build
 
 on:
   push:
@@ -22,6 +22,9 @@ jobs:
       
       - name: Install dependencies using Yarn
         run: yarn install
+      
+      - name: Generate GraphQL types based on the schema 
+        run: yarn apollo-gen
       
       - name: Build the app
         run: yarn build
