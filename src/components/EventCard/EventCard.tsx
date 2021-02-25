@@ -1,4 +1,11 @@
-import { Avatar, Button, Description, Tag, Text } from "@geist-ui/react";
+import {
+	Avatar,
+	Button,
+	Description,
+	Tag,
+	Text,
+	Tooltip,
+} from "@geist-ui/react";
 import { format, getDate, parseISO } from "date-fns";
 import React, { useMemo } from "react";
 
@@ -104,7 +111,9 @@ const EventCard: React.FC<EventCardProperties> = ({
 							content={
 								<Avatar.Group>
 									{hosts.map(({ name, photo }) => (
-										<Avatar key={name} src={photo} stacked />
+										<Tooltip key={name} text={name}>
+											<Avatar src={photo} stacked />
+										</Tooltip>
 									))}
 								</Avatar.Group>
 							}
@@ -118,7 +127,9 @@ const EventCard: React.FC<EventCardProperties> = ({
 							partecipants.length > 0 ? (
 								<Avatar.Group count={partecipantsCount}>
 									{partecipants.map(({ name, photo }) => (
-										<Avatar key={name} src={photo} stacked />
+										<Tooltip key={name} text={name}>
+											<Avatar src={photo} text={name[0]} stacked />
+										</Tooltip>
 									))}
 								</Avatar.Group>
 							) : (

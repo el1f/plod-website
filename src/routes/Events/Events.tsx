@@ -3,7 +3,7 @@ import { Note, Spacer, Text } from "@geist-ui/react";
 import { useOnQuery as useFirebaseQuery } from "@typesaurus/react";
 import { formatISO } from "date-fns";
 import firebase from "firebase";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { collection, where } from "typesaurus";
 
 import EventCard, { EventCardSkeleton } from "../../components/EventCard";
@@ -20,6 +20,8 @@ const eventsPartecipations = collection<FirestoreEventPartecipation>(
 );
 
 const Events: React.FC = () => {
+	const now = useMemo(() => formatISO(new Date()), []);
+
 	const { loading, error, data } = useQuery<
 		getFutureEvents,
 		getFutureEventsVariables
@@ -64,7 +66,7 @@ const Events: React.FC = () => {
 		`,
 		{
 			variables: {
-				now: formatISO(new Date()),
+				now,
 			},
 		},
 	);
@@ -149,7 +151,7 @@ const Events: React.FC = () => {
 								cover={event.cover?.url}
 								hosts={event.hostCrews.map((crew) => ({
 									name: crew.name,
-									photo: crew.logo.url,
+									photo: crew.logo?.url,
 								}))}
 								partecipants={partecipantsData}
 								partecipantsCount={partecipantsData?.length ?? 0}

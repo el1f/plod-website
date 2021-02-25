@@ -4,7 +4,6 @@ export const Layout = styled.div`
 	box-sizing: border-box;
 	margin: 0 auto;
 	max-width: 1080px;
-	overflow-x: hidden;
 	width: 100%;
 
 	* {
@@ -14,6 +13,7 @@ export const Layout = styled.div`
 	@media (max-width: 1128px) {
 		padding: 0 24px;
 		max-width: none;
+		overflow-x: hidden;
 	}
 `;
 
@@ -25,7 +25,8 @@ export const EventsCarousel = styled.div`
 	overflow-x: scroll;
 	padding-bottom: 30px;
 	padding-left: calc((100vw - 1080px) / 2);
-	width: 100%;
+	/* width: 100%; */
+	width: calc(100% + ((100vw - 1080px) / 2) + ((100vw - 1080px) / 2));
 
 	@media (max-width: 1080px) {
 		margin-left: -24px;
