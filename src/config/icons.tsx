@@ -7,7 +7,11 @@ import {
 	FaWhatsapp as WhatsappIcon,
 } from "react-icons/fa";
 
-export { FiShare2 as ShareIcon, FiCopy as CopyIcon } from "react-icons/fi";
+export {
+	FiShare2 as ShareIcon,
+	FiCopy as CopyIcon,
+	FiMapPin as LocationIcon,
+} from "react-icons/fi";
 
 export const SocialIcons = {
 	discord: <DiscordIcon />,

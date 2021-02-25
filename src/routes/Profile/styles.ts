@@ -4,8 +4,8 @@ export const Layout = styled.div`
 	box-sizing: border-box;
 	display: grid;
 	grid-row-gap: 32px;
-	grid-template-rows: 80px minmax(32px, 1fr) auto auto minmax(32px, 1fr);
-	height: 100vh;
+	grid-template-rows: minmax(32px, 1fr) auto auto minmax(32px, 1fr);
+	height: calc(100vh - 80px);
 `;
 
 export const Body = styled.div`
