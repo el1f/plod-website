@@ -5,6 +5,7 @@ import RestrictedRoute from "../components/RestrictedRoute";
 import WebsiteLayout from "../layouts/WebsiteLayout";
 import Events from "./Events";
 import Home from "./Home";
+import Onboarding from "./Onboarding";
 import Profile from "./Profile";
 
 const Routes: React.FC = () => {
@@ -14,7 +15,7 @@ const Routes: React.FC = () => {
 				<Switch>
 					<RestrictedRoute
 						path="/onboarding"
-						component={Events}
+						component={Onboarding}
 						requiresUnonboarding
 					/>
 					<RestrictedRoute
