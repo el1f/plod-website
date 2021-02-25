@@ -1,6 +1,7 @@
 import firebaseCore from "firebase/app";
 
 import "firebase/firestore";
+import "firebase/storage";
 import "firebase/auth";
 import "firebase/analytics";
 import "firebase/performance";
@@ -22,6 +23,7 @@ if (firebaseCore.apps.length === 0) {
 
 export const firebase = firebaseCore;
 export const firestore = firebaseCore.firestore();
+export const storage = firebaseCore.storage();
 export const auth = firebase.auth();
 export const functions = firebase.functions();
 export const analytics = firebase.analytics();
