@@ -4,9 +4,9 @@ import * as functions from "firebase-functions";
 const initUser = functions.auth.user().onCreate(async (user) => {
 	const database = admin.firestore();
 
-	const counters = await database.collection("stats").doc("counters").get();
-	const countersData = await counters.data();
-	const usersCount = countersData?.name ?? 0;
+	const stats = await database.collection("stats").doc("stats").get();
+	const statsData = await stats.data();
+	const usersCount = statsData?.counters.users ?? 0;
 
 	database
 		.collection("stats")

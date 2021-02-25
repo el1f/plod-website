@@ -1,5 +1,5 @@
 import { Avatar, Button, Link, Popover, Text } from "@geist-ui/react";
-import { useGet } from "@typesaurus/react";
+import { useOnGet } from "@typesaurus/react";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link as RouterLink } from "react-router-dom";
@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProperties> = ({
 	onLogoutClick,
 }: NavbarProperties) => {
 	const [user, loading] = useAuthState(auth);
-	const [profile] = useGet(users, auth.currentUser?.uid ?? "");
+	const [profile] = useOnGet(users, auth.currentUser?.uid ?? "");
 
 	return (
 		<Container>

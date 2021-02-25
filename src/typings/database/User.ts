@@ -7,8 +7,14 @@ export interface FirestoreUser {
 	alias?: string;
 	photoUrl?: string;
 	progressive: number;
-	mainCrew?: string;
-	groups?: string[];
+	mainCrew?: {
+		ref: string;
+		name: string;
+	};
+	groups?: {
+		ref: string;
+		name: string;
+	}[];
 	links?: {
 		type: SupportedSocial;
 		label: string;

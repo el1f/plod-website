@@ -1,5 +1,5 @@
 import { Loading, Note } from "@geist-ui/react";
-import { useGet } from "@typesaurus/react";
+import { useOnGet } from "@typesaurus/react";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Redirect, Route, RouteProps } from "react-router-dom";
@@ -25,7 +25,7 @@ const RestrictedRoute: React.FC<RestrictedRouteProperties> = ({
 	...rest
 }: RestrictedRouteProperties) => {
 	const [user, loading, error] = useAuthState(auth);
-	const [profile, { loading: profileLoading, error: profileError }] = useGet(
+	const [profile, { loading: profileLoading, error: profileError }] = useOnGet(
 		users,
 		user?.uid ?? "",
 	);
