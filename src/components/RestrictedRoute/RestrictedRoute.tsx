@@ -25,10 +25,7 @@ const RestrictedRoute: React.FC<RestrictedRouteProperties> = ({
 	...rest
 }: RestrictedRouteProperties) => {
 	const [user, loading, error] = useAuthState(auth);
-	const [profile, { loading: profileLoading, error: profileError }] = useOnGet(
-		users,
-		user?.uid ?? "",
-	);
+	const [profile, { error: profileError }] = useOnGet(users, user?.uid ?? "");
 
 	console.log("AUTH", requiresOnboarding, profile, !profile?.data.onboarded);
 
