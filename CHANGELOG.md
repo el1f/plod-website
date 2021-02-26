@@ -1,3 +1,10 @@
+## v0.3.1
+
+#### 27/02/2021
+
+- **FIX** profile avatars
+- **FIX** event card avatars
+
 ## v0.3.0
 
 #### 26/02/2021
