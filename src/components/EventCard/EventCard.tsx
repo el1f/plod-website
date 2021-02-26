@@ -61,6 +61,8 @@ const EventCard: React.FC<EventCardProperties> = ({
 	isPresent = false,
 	onPartecipationClick,
 }: EventCardProperties) => {
+	const avatarCount = 8;
+	const morePresenceCount = 5;
 	const dateObject = parseISO(date);
 	const eventHour = format(dateObject, "HH:mm");
 	const eventDate = getDate(dateObject);
@@ -167,12 +169,36 @@ const EventCard: React.FC<EventCardProperties> = ({
 						title="PARTECIPANTS"
 						content={
 							partecipants.length > 0 ? (
-								<Avatar.Group count={partecipantsCount}>
-									{partecipants.map(({ name, photo }) => (
+								<Avatar.Group>
+									{partecipants.slice(0, avatarCount).map(({ name, photo }) => (
 										<Tooltip key={name} text={name}>
 											<Avatar src={photo} text={name[0]} stacked />
 										</Tooltip>
 									))}
+									<Tooltip
+										placement="bottom"
+										text={
+											<ul>
+												{partecipants
+													.slice(avatarCount, avatarCount + morePresenceCount)
+													.map(({ name }) => (
+														<li key={name}>{name}</li>
+													))}
+												{
+													<li>
+														Altri +
+														{partecipantsCount -
+															avatarCount -
+															morePresenceCount}
+													</li>
+												}
+											</ul>
+										}
+									>
+										{partecipantsCount - avatarCount > 0 && (
+											<Text>+{partecipantsCount - avatarCount}</Text>
+										)}
+									</Tooltip>
 								</Avatar.Group>
 							) : (
 								"Nobody"

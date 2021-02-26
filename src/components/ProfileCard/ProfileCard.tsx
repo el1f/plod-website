@@ -1,4 +1,4 @@
-import { Text } from "@geist-ui/react";
+import { Avatar, Text } from "@geist-ui/react";
 import React from "react";
 
 import WhiteLogo from "../../assets/logos/white.svg";
@@ -6,7 +6,6 @@ import { SocialIcons } from "../../config/icons";
 import { SupportedSocial } from "../../typings/SupportedSocial";
 import HandleChip from "../HandleChip";
 import {
-	Avatar,
 	Card,
 	Content,
 	CrewPic,
@@ -49,7 +48,7 @@ const ProfileCard: React.FC<ProfileCardProperties> = ({
 					</Decoration>
 					<Header>
 						<PhotoBox>
-							<Avatar src={photo} />
+							<Avatar size={128} src={photo} />
 							{mainGroup && (
 								<CrewPic>
 									<Avatar src={mainGroup.logo} alt={mainGroup.name} />
