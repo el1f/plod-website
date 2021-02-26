@@ -3,12 +3,9 @@ import {
 	Avatar,
 	Button,
 	Card,
-	Col,
 	Description,
-	Divider,
 	Grid,
 	Input,
-	Row,
 	Spacer,
 	Text,
 	Toggle,
@@ -41,9 +38,9 @@ const Onboarding: React.FC = () => {
 		setAvatar(acceptedFiles[0]);
 	}, []);
 
-	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+	const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-	const { loading, error, data } = useQuery<getCrews>(
+	const { data } = useQuery<getCrews>(
 		gql`
 			query getCrews {
 				crews {
