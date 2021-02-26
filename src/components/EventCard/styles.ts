@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components/macro";
 
 export const Wrapper = styled.div`
@@ -67,18 +68,6 @@ export const Location = styled.a`
 	}
 `;
 
-export const Date = styled.div`
-	background: linear-gradient(135deg, red 0%, cyan 100%);
-	border-radius: 12px;
-	display: flex;
-	flex-shrink: 0;
-	height: 100%;
-	margin-left: 16px;
-	min-width: 44px;
-	overflow: visible;
-	padding: 2px;
-`;
-
 export const DateHour = styled.div`
 	align-items: center;
 	background-color: ${({ theme }) => theme.palette.background};
@@ -100,6 +89,27 @@ export const DateDay = styled.div`
 
 	& > * {
 		line-height: 1.2;
+	}
+`;
+
+export const Date = styled(motion.div)`
+	align-items: stretch;
+	background: linear-gradient(135deg, red 0%, cyan 100%);
+	border: none;
+	border-radius: 12px;
+	cursor: pointer;
+	display: flex;
+	flex-shrink: 0;
+	height: 48px;
+	margin-left: 16px;
+	min-width: 44px;
+	overflow: visible;
+	padding: 2px;
+
+	&:hover {
+		${DateDay}, ${DateHour} {
+			background-color: ${({ theme }) => theme.palette.accents_1};
+		}
 	}
 `;
 
