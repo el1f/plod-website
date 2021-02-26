@@ -10,7 +10,7 @@ import {
 import React, { FormEvent, useState } from "react";
 
 import { Navbar } from "../../components/Navbar";
-import { auth } from "../../config/firebase";
+import { analytics, auth } from "../../config/firebase";
 import { AuthForm, Layout } from "./styles";
 
 export interface WebsiteLayoutProperties {
@@ -47,6 +47,11 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 			}
 		} else {
 			try {
+				analytics.logEvent("sign_up_create_user", {
+					email,
+					timestamp: new Date().toISOString(),
+				});
+
 				await auth.createUserWithEmailAndPassword(email, pwd);
 
 				setToast({
