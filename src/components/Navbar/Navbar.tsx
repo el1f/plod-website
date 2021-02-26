@@ -1,10 +1,19 @@
-import { Avatar, Button, Link, Popover, Text } from "@geist-ui/react";
+import {
+	Avatar,
+	Button,
+	Link,
+	Popover,
+	Spacer,
+	Tag,
+	Text,
+} from "@geist-ui/react";
 import { useOnGet } from "@typesaurus/react";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link as RouterLink } from "react-router-dom";
 import { collection } from "typesaurus";
 
+import _package from "../../../package.json";
 import { ReactComponent as Logo } from "../../assets/logos/white.svg";
 import { analytics, auth } from "../../config/firebase";
 import { DiscordIcon, InstagramIcon } from "../../config/icons";
@@ -74,9 +83,13 @@ const Navbar: React.FC<NavbarProperties> = ({
 							content={
 								<>
 									<Popover.Item title>
-										<Text
-											span
-										>{`${profile.data.firstName} ${profile.data.lastName}`}</Text>
+										<Text span>{`${
+											profile.data.firstName ? profile.data.firstName : ""
+										} ${
+											profile.data.lastName ? profile.data.lastName : ""
+										}`}</Text>
+										<Spacer style={{ marginLeft: "auto" }} />
+										<Tag>v{_package.version}</Tag>
 									</Popover.Item>
 									<Popover.Item>
 										<Button type="secondary" onClick={onLogoutClick}>
