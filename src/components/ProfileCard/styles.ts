@@ -79,12 +79,12 @@ export const PhotoBox = styled.figure`
 	margin: 0 auto;
 	position: relative;
 	width: 128px;
-`;
 
-export const Avatar = styled.img`
-	border-radius: 50%;
-	height: 100%;
-	width: 100%;
+	.avatar {
+		img {
+			object-fit: cover;
+		}
+	}
 `;
 
 export const CrewPic = styled.div`
