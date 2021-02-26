@@ -159,11 +159,20 @@ export const Categories = styled.div`
 export const PartecipantGroup = styled.div`
 	margin-bottom: 16px;
 
+	p {
+		display: block;
+		padding-left: 8px;
+	}
+
 	.avatar-group {
 		padding-left: 0.625rem;
 
-		& > .avatar {
+		.avatar {
 			background-color: ${({ theme }) => theme.palette.accents_2};
+
+			& > img {
+				object-fit: cover;
+			}
 		}
 	}
 `;
