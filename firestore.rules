@@ -12,6 +12,10 @@ service cloud.firestore {
     match /users/{document=**} {
       allow read, write: if true;
     }
+    
+    match /eventPartecipations/{document=**} {
+      allow read, write: if true;
+    }
 
     match /{document=**} {
       allow read, write: if false;
