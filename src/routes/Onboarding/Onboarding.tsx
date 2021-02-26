@@ -3,12 +3,9 @@ import {
 	Avatar,
 	Button,
 	Card,
-	Col,
 	Description,
-	Divider,
 	Grid,
 	Input,
-	Row,
 	Spacer,
 	Text,
 	Toggle,
@@ -20,7 +17,7 @@ import firebase from "firebase";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-import { auth, firestore, storage } from "../../config/firebase";
+import { analytics, auth, firestore, storage } from "../../config/firebase";
 import { getCrews } from "./.apollo/getCrews";
 import { AvatarCard, Container, CrewCard, CrewCardActions } from "./styles";
 
@@ -41,9 +38,9 @@ const Onboarding: React.FC = () => {
 		setAvatar(acceptedFiles[0]);
 	}, []);
 
-	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+	const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-	const { loading, error, data } = useQuery<getCrews>(
+	const { data } = useQuery<getCrews>(
 		gql`
 			query getCrews {
 				crews {
@@ -161,6 +158,11 @@ const Onboarding: React.FC = () => {
 				.collection("users")
 				.doc(auth.currentUser.uid)
 				.update(profilePayload);
+
+			analytics.logEvent("sign_up_onboard_user", {
+				email: auth.currentUser.email,
+				timestamp: new Date().toISOString(),
+			});
 
 			setToast({
 				type: "success",

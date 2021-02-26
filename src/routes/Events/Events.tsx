@@ -173,6 +173,7 @@ const Events: React.FC = () => {
 								name={event.name}
 								date={event.date}
 								locationName={event.spot?.name ?? ""} //TODO: remove the elvis
+								locationAddress={event.spot?.address ?? ""} //TODO: remove the elvis
 								locationCoords={
 									event.spot?.location
 										? [

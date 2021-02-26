@@ -15,7 +15,7 @@ import { collection, where } from "typesaurus";
 
 import ProfileCard from "../../components/ProfileCard";
 import SocialShareButton from "../../components/SocialShareButton";
-import { auth } from "../../config/firebase";
+import { analytics, auth } from "../../config/firebase";
 import { CopyIcon, ShareIcon } from "../../config/icons";
 import { FirestoreUser } from "../../typings/database/User";
 import { Actions, AvailableSocials, Body, Layout, SharePanel } from "./styles";
@@ -34,6 +34,14 @@ const Profile: React.FC = () => {
 	const aliasMatch = useRouteMatch<{ alias: string }>("/rider/:alias");
 	const useUid = meMatch || uidMatch;
 	const useAlias = Boolean(aliasMatch);
+
+	useEffect(() => {
+		analytics.logEvent("profile_view", {
+			alias: aliasMatch?.params.alias,
+			uid: uidMatch?.params.uid,
+			timestamp: new Date().toISOString(),
+		});
+	}, [aliasMatch?.params.alias, uidMatch?.params.uid]);
 
 	const uid = (meMatch ? auth.currentUser?.uid : uidMatch?.params.uid) ?? "";
 	const alias = aliasMatch?.params.alias ?? "";
@@ -136,10 +144,20 @@ const Profile: React.FC = () => {
 							<SocialShareButton
 								social="whatsapp"
 								target={`https://api.whatsapp.com/send?text=${shareMessage}`}
+								onClick={() =>
+									analytics.logEvent("profile_share", {
+										method: "whatsapp",
+									})
+								}
 							/>
 							<SocialShareButton
 								social="telegram"
 								target={`https://t.me/share/url?url=${sharableUrl}&text=${shareText}`}
+								onClick={() =>
+									analytics.logEvent("profile_share", {
+										method: "telegram",
+									})
+								}
 							/>
 						</AvailableSocials>
 						<Input
@@ -147,7 +165,12 @@ const Profile: React.FC = () => {
 							width="100%"
 							value={sharableUrl}
 							iconRight={<CopyIcon />}
-							onIconClick={copyToClipboard}
+							onIconClick={() => {
+								analytics.logEvent("profile_share", {
+									method: "clipboard",
+								});
+								copyToClipboard();
+							}}
 							iconClickable
 							readOnly
 						/>
@@ -157,7 +180,12 @@ const Profile: React.FC = () => {
 								size="large"
 								type="secondary"
 								icon={<ShareIcon />}
-								onClick={shareWithNavigator}
+								onClick={() => {
+									analytics.logEvent("profile_share", {
+										method: "navigator",
+									});
+									shareWithNavigator();
+								}}
 							>
 								Share with...
 							</Button>

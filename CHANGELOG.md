@@ -1,4 +1,16 @@
+## v0.3.0
+
+#### 26/02/2021
+
+- **EDIT** The app version is now shown in the navbar profile menu
+- **FIX** Linting issues
+- **ADD** Google Analytics events
+- **ADD** Sentry crashalytics
+- **ADD** Events date now links to Google Calendar event creation
+
 ## v0.2.1
+
+#### 26/02/2021
 
 - **FIX** Missing compilation in the CI
 

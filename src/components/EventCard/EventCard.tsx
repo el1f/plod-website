@@ -2,11 +2,13 @@ import {
 	Avatar,
 	Button,
 	Description,
+	Link,
+	Popover,
 	Tag,
 	Text,
 	Tooltip,
 } from "@geist-ui/react";
-import { format, getDate, parseISO } from "date-fns";
+import { add, format, getDate, parseISO } from "date-fns";
 import React, { useMemo } from "react";
 
 import { LocationIcon } from "../../config/icons";
@@ -28,6 +30,7 @@ interface EventCardProperties {
 	name: string;
 	date: string;
 	locationName: string;
+	locationAddress: string;
 	locationCoords?: [number, number];
 	categories?: string[];
 	cover?: string;
@@ -48,6 +51,7 @@ const EventCard: React.FC<EventCardProperties> = ({
 	name,
 	date,
 	locationName,
+	locationAddress,
 	locationCoords,
 	categories = [],
 	cover,
@@ -88,21 +92,50 @@ const EventCard: React.FC<EventCardProperties> = ({
 					<LocationIcon />
 					<Text span>{locationName}</Text>
 				</Location>
-				<Date>
-					<DateHour>
-						<Text>
-							<strong>{eventHour}</strong>
-						</Text>
-					</DateHour>
-					<DateDay>
-						<Text>
-							<strong>{eventDate}</strong>
-						</Text>
-						<Text size={10} small>
-							{eventMonth}
-						</Text>
-					</DateDay>
-				</Date>
+				<Popover
+					placement="bottomEnd"
+					content={
+						<>
+							<Popover.Item>
+								<Link
+									href={`http://www.google.com/calendar/event?${encodeURI(
+										`action=TEMPLATE&dates=${format(
+											dateObject,
+											"yyyyMMdd'T'HHmm00",
+										)}/${format(
+											add(dateObject, { hours: 4 }),
+											"yyyyMMdd'T'HHmm00",
+										)}&text=${name}&location=${locationAddress}`,
+									)}`}
+									target="_blank"
+								>
+									Add to Google Calendar
+								</Link>
+							</Popover.Item>
+						</>
+					}
+				>
+					<Date
+						whileHover={{
+							scale: 1.05,
+						}}
+						whileTap={{ scale: 0.95 }}
+					>
+						<DateHour>
+							<Text>
+								<strong>{eventHour}</strong>
+							</Text>
+						</DateHour>
+						<DateDay>
+							<Text>
+								<strong>{eventDate}</strong>
+							</Text>
+							<Text size={10} small>
+								{eventMonth}
+							</Text>
+						</DateDay>
+					</Date>
+				</Popover>
 			</Header>
 			<Content>
 				{cover && (
