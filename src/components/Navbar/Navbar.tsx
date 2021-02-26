@@ -6,7 +6,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { collection } from "typesaurus";
 
 import { ReactComponent as Logo } from "../../assets/logos/white.svg";
-import { auth } from "../../config/firebase";
+import { analytics, auth } from "../../config/firebase";
 import { DiscordIcon, InstagramIcon } from "../../config/icons";
 import { FirestoreUser } from "../../typings/database/User";
 import {
@@ -45,12 +45,25 @@ const Navbar: React.FC<NavbarProperties> = ({
 				</Links>
 				<Actions>
 					<Link
+						onClick={() =>
+							analytics.logEvent("external_link_view", {
+								target: "instagram",
+							})
+						}
 						href="https://www.instagram.com/padova_longboard/"
 						target="_blank"
 					>
 						<InstagramIcon />
 					</Link>
-					<Link href="https://discord.gg/bp7ztg4AEz" target="_blank">
+					<Link
+						onClick={() =>
+							analytics.logEvent("external_link_view", {
+								target: "discord",
+							})
+						}
+						href="https://discord.gg/bp7ztg4AEz"
+						target="_blank"
+					>
 						<DiscordIcon />
 					</Link>
 				</Actions>
