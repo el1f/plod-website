@@ -100,6 +100,12 @@ const Events: React.FC = () => {
 					.doc(eventId)
 					.get();
 
+				if (!currentPartecipationsDocument.exists) {
+					await firestore.collection("eventPartecipations").doc(eventId).set({
+						eventId,
+					});
+				}
+
 				await firestore
 					.collection("eventPartecipations")
 					.doc(eventId)
@@ -123,14 +129,16 @@ const Events: React.FC = () => {
 			} catch {
 				setToast({
 					type: "error",
-					text: `There was an error signing you up ${
-						isPresent ? "out of" : "to"
+					text: `There was an error signing you ${
+						isPresent ? "out of" : "up to"
 					} this event. Try again!`,
 				});
 			}
 		},
 		[setToast],
 	);
+
+	console.log(eventsPartecipationsData);
 
 	return (
 		<Layout>
