@@ -1,3 +1,9 @@
+## v0.3.2
+
+#### 02/03/2021
+
+- **FIX** New events don't allow users to sign their presence up
+
 ## v0.3.1
 
 #### 27/02/2021
