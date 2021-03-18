@@ -1,3 +1,4 @@
+import { Card } from "@geist-ui/react";
 import styled from "styled-components/macro";
 
 export const Layout = styled.div`
@@ -69,5 +70,14 @@ export const EventsCarousel = styled.div`
 
 	& > * {
 		margin-right: 24px;
+	}
+`;
+
+export const AlertCard = styled(Card)`
+	text-align: center;
+
+	& > * {
+		margin: 0 auto;
+		max-width: 512px;
 	}
 `;

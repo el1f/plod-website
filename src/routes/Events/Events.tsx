@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { Note, Spacer, Text, useToasts } from "@geist-ui/react";
+import { Card, Note, Spacer, Text, useToasts } from "@geist-ui/react";
 import { useOnQuery as useFirebaseQuery } from "@typesaurus/react";
 import { formatISO } from "date-fns";
 import firebase from "firebase";
@@ -13,7 +13,7 @@ import {
 	getFutureEvents,
 	getFutureEventsVariables,
 } from "./.apollo/getFutureEvents";
-import { EventsCarousel, Layout } from "./styles";
+import { AlertCard, EventsCarousel, Layout } from "./styles";
 
 const eventsPartecipations = collection<FirestoreEventPartecipation>(
 	"eventPartecipations",
@@ -138,8 +138,6 @@ const Events: React.FC = () => {
 		[setToast],
 	);
 
-	console.log(eventsPartecipationsData);
-
 	return (
 		<Layout>
 			<Text h1>Events</Text>
@@ -155,6 +153,21 @@ const Events: React.FC = () => {
 						<EventCardSkeleton />
 						<EventCardSkeleton />
 					</>
+				)}
+				{!(loading || eventsPartecipationsLoading) && events.length === 0 && (
+					<AlertCard>
+						<Text h2 size={80}>
+							<span role="img" aria-label="Sad Face">
+								😢
+							</span>
+						</Text>
+						<Text h2>No events incoming fella...</Text>
+						<Text>
+							{`There are no events incoming in the foreseable future my friend.
+							We're working very hard to keep the scene moving but the Covid
+							situation definitely doesn't help... Check out our social channels to stay posted on any updates.`}
+						</Text>
+					</AlertCard>
 				)}
 				{events
 					.filter((event) => Boolean(event.spot))
