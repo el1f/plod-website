@@ -48,7 +48,6 @@ const Footer: React.FC = () => {
 				<Copyright>
 					<Text>© {new Date().getFullYear()}</Text>
 				</Copyright>
-				<Legal></Legal>
 			</Content>
 		</Wrapper>
 	);

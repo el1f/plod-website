@@ -22,6 +22,13 @@ export const Content = styled.div`
 	margin: 0 auto;
 	max-width: 1080px;
 	padding-top: 32px;
+
+	@media (max-width: 1080px) {
+		padding: 32px 16px 0;
+		grid-template-columns: 1fr;
+		grid-template-areas: "trademark" "links" "copyright";
+		grid-template-rows: auto auto auto;
+	}
 `;
 
 export const Trademark = styled.div`
@@ -54,6 +61,10 @@ export const Links = styled.div`
 
 	h6 {
 		opacity: 0.5;
+	}
+
+	@media (max-width: 1080px) {
+		justify-self: flex-start;
 	}
 `;
 

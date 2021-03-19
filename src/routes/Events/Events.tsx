@@ -149,23 +149,23 @@ const Events: React.FC = () => {
 					<Spacer y={1} />
 				</>
 			)}
+			{!(loading || eventsPartecipationsLoading) && events.length === 0 && (
+				<AlertCard>
+					<Text h2 size={80}>
+						<span role="img" aria-label="Sad Face">
+							😢
+						</span>
+					</Text>
+					<Text h2>{t("events.noEvents.title")}</Text>
+					<Text>{t("events.noEvents.details")}</Text>
+				</AlertCard>
+			)}
 			<EventsCarousel>
 				{(loading || eventsPartecipationsLoading) && (
 					<>
 						<EventCardSkeleton />
 						<EventCardSkeleton />
 					</>
-				)}
-				{!(loading || eventsPartecipationsLoading) && events.length === 0 && (
-					<AlertCard>
-						<Text h2 size={80}>
-							<span role="img" aria-label="Sad Face">
-								😢
-							</span>
-						</Text>
-						<Text h2>{t("events.noEvents.title")}</Text>
-						<Text>{t("events.noEvents.details")}</Text>
-					</AlertCard>
 				)}
 				{events
 					.filter((event) => Boolean(event.spot))
