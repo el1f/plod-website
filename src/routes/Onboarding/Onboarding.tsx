@@ -16,12 +16,14 @@ import { format } from "date-fns";
 import firebase from "firebase";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { useTranslation } from "react-i18next";
 
 import { analytics, auth, firestore, storage } from "../../config/firebase";
 import { getCrews } from "./.apollo/getCrews";
 import { AvatarCard, Container, CrewCard, CrewCardActions } from "./styles";
 
 const Onboarding: React.FC = () => {
+	const { t } = useTranslation();
 	const [, setToast] = useToasts();
 	const [signingUp, setSigningUp] = useState(false);
 
@@ -95,7 +97,7 @@ const Onboarding: React.FC = () => {
 
 			return setToast({
 				type: "error",
-				text: `You haven't filled the following fields: ${
+				text: `${t("onboarding.notifications.error.missingFields")}: ${
 					!firstName ? "First name," : ""
 				} ${!lastName ? "Last name," : ""} ${!alias ? "Alias," : ""} ${
 					!avatar ? "Avatar" : ""
@@ -105,8 +107,7 @@ const Onboarding: React.FC = () => {
 
 		// 1. upload the avatar to Firebase and get its URL
 		setToast({
-			text:
-				"Starting the upload of your profile picture. This could take a while so please grab a cupo of coffee and wait.",
+			text: t("onboarding.notifications.info.startUpload"),
 		});
 
 		const avatarReference = storage
@@ -122,8 +123,7 @@ const Onboarding: React.FC = () => {
 
 		setToast({
 			type: "success",
-			text:
-				"Your avatar has been successfully uploaded! Now let's get the rest of your profile setup.",
+			text: t("onboarding.notifications.info.finishUpload"),
 		});
 
 		// 2. Clean up the data before submitting
@@ -166,12 +166,12 @@ const Onboarding: React.FC = () => {
 
 			setToast({
 				type: "success",
-				text: "We got your user set up! Welcome to the gang my friend.",
+				text: t("onboarding.notifications.info.userCreated"),
 			});
 		} catch {
 			setToast({
 				type: "error",
-				text: "There was an error updating your profile. Try again please!",
+				text: t("onboarding.notifications.error.general"),
 			});
 		}
 
@@ -180,24 +180,16 @@ const Onboarding: React.FC = () => {
 
 	return (
 		<Container>
-			<Text h1>{"Let's get started!"}</Text>
-			<Text h5>
-				{
-					"Welcome to Padova Longboard! The coolest group of longboarders you can find around you! We checked to make sure that we can make such a statement and we're still not sure we can but whatever!"
-				}
-			</Text>
-			<Text>
-				{
-					"We're going to need a couple pieces of information on you to be able to sign you up to our events and stuff! Hope you're ready!"
-				}
-			</Text>
+			<Text h1>{t("onboarding.title")}</Text>
+			<Text h5>{t("onboarding.subtitle")}</Text>
+			<Text>{t("onboarding.presentation")}</Text>
 			<Spacer y={2.5} />
-			<Text h4>The basics</Text>
+			<Text h4>{t("onboarding.basicsTitle")}</Text>
 			<Grid.Container gap={1}>
 				<Grid xs={24} md={8}>
 					<Input
 						{...firstNameBindings}
-						placeholder="First Name"
+						placeholder={t("onboarding.firstName")}
 						size="large"
 						width="100%"
 					/>
@@ -205,26 +197,26 @@ const Onboarding: React.FC = () => {
 				<Grid xs={24} md={8}>
 					<Input
 						{...lastNameBindings}
-						placeholder="Last Name"
+						placeholder={t("onboarding.lastName")}
 						size="large"
 						width="100%"
 					/>
 				</Grid>
 			</Grid.Container>
 			<Spacer y={1.5} />
-			<Text h4>And how should WE call you?</Text>
+			<Text h4>{t("onboarding.profileTitle")}</Text>
 			<Grid.Container gap={1}>
 				<Grid xs={24} md={12}>
 					<Input
 						{...aliasBindings}
-						placeholder="Alias"
+						placeholder={t("onboarding.alias")}
 						size="large"
 						width="100%"
 					/>
 				</Grid>
 			</Grid.Container>
 			<Spacer y={1.5} />
-			<Text h4>Show us how you look!</Text>
+			<Text h4>{t("onboarding.avatarTitle")}</Text>
 			<Grid.Container gap={1}>
 				<Grid xs={24} md>
 					<Card {...getRootProps()} hoverable>
@@ -240,15 +232,15 @@ const Onboarding: React.FC = () => {
 								}
 							/>
 							<div>
-								<Text h5>Your avatar</Text>
-								<Text span>Click this card to pick your avatar!</Text>
+								<Text h5>{t("onboarding.avatarCardTitle")}</Text>
+								<Text span>{t("onboarding.avatarCardDesc")}</Text>
 							</div>
 						</AvatarCard>
 					</Card>
 				</Grid>
 			</Grid.Container>
 			<Spacer y={1.5} />
-			<Text h4>Are you part of one of our crews?</Text>
+			<Text h4>{t("onboarding.crewsTitle")}</Text>
 			<Grid.Container gap={1}>
 				{data?.crews.map((crew) => (
 					<Grid key={crew.id} xs={12} md={8}>
@@ -266,7 +258,7 @@ const Onboarding: React.FC = () => {
 							<Card.Footer>
 								<CrewCardActions>
 									<Description
-										title="Member"
+										title={t("onboarding.crewsMember")}
 										content={
 											<Toggle
 												size="large"
@@ -282,7 +274,7 @@ const Onboarding: React.FC = () => {
 										}
 									/>
 									<Description
-										title="Main Crew"
+										title={t("onboarding.crewsMain")}
 										content={
 											<Toggle
 												size="large"
@@ -316,7 +308,7 @@ const Onboarding: React.FC = () => {
 				auto
 				onClick={() => submitUserForm()}
 			>
-				Get me in!
+				{t("onboarding.submit")}
 			</Button>
 		</Container>
 	);

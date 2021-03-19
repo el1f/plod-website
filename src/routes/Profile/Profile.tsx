@@ -10,6 +10,7 @@ import {
 } from "@geist-ui/react";
 import { useGet, useQuery } from "@typesaurus/react";
 import React, { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Redirect, useRouteMatch } from "react-router-dom";
 import { collection, where } from "typesaurus";
 
@@ -23,6 +24,7 @@ import { Actions, AvailableSocials, Body, Layout, SharePanel } from "./styles";
 const users = collection<FirestoreUser>("users");
 
 const Profile: React.FC = () => {
+	const { t } = useTranslation();
 	const profileFieldReference = useRef<HTMLInputElement>(null);
 
 	const { setVisible, bindings } = useModal();
@@ -67,13 +69,17 @@ const Profile: React.FC = () => {
 		alias || user.alias
 	}`;
 
-	const shareText = encodeURI("Check my Rider Profile on Padova Longboard!");
+	const shareText = encodeURI(t("profile.shareText"));
 
 	const shareMessage = `${shareText}%0A%0A${sharableUrl}`;
 
 	const shareData = {
-		title: `${user.firstName} ${user.lastName} AKA ${user.alias}`,
-		text: `Padova Longboarding rider profile - Riding for ${user.mainCrew}`,
+		title: t("profile.shareText", {
+			firstName: user.firstName,
+			lastName: user.lastName,
+			alias: user.alias,
+		}),
+		text: t("profile.shareDataText", { crew: user.mainCrew }),
 		url: sharableUrl,
 	};
 
@@ -84,8 +90,7 @@ const Profile: React.FC = () => {
 		} catch {
 			setToast({
 				type: "error",
-				text:
-					"There was an error while sharing your profile. This can be caused by your browers or device not supporting this functionality. Try again or copy the URL.",
+				text: t("profile.notifications.info.navigatorShareError"),
 			});
 		}
 	}
@@ -93,7 +98,7 @@ const Profile: React.FC = () => {
 	function copyToClipboard(): void {
 		copy(sharableUrl);
 		setToast({
-			text: "Your link has been successfully copied!",
+			text: t("profile.notifications.info.clipboardCopy"),
 		});
 	}
 
@@ -123,7 +128,7 @@ const Profile: React.FC = () => {
 						icon={<ShareIcon />}
 						onClick={() => setVisible(true)}
 					>
-						Share
+						{t("profile.share")}
 					</Button>
 				)}
 				{/* <Button size="large" icon={<FiDownload />}>
@@ -133,10 +138,8 @@ const Profile: React.FC = () => {
 			<div />
 
 			<Modal {...bindings}>
-				<Modal.Title>Share the steeze</Modal.Title>
-				<Modal.Subtitle>
-					Share your rider profile with whomever you want, however you want!
-				</Modal.Subtitle>
+				<Modal.Title>{t("profile.shareDialog.title")}</Modal.Title>
+				<Modal.Subtitle>{t("profile.shareDialog.description")}</Modal.Subtitle>
 				<Spacer y={2} />
 				<Modal.Content>
 					<SharePanel>
@@ -187,7 +190,7 @@ const Profile: React.FC = () => {
 									shareWithNavigator();
 								}}
 							>
-								Share with...
+								{t("profile.shareDialog.shareWith")}
 							</Button>
 						)}
 					</SharePanel>

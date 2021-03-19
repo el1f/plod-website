@@ -10,6 +10,7 @@ import {
 import { useOnGet } from "@typesaurus/react";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
 import { collection } from "typesaurus";
 
@@ -37,6 +38,7 @@ const Navbar: React.FC<NavbarProperties> = ({
 	onLoginClick,
 	onLogoutClick,
 }: NavbarProperties) => {
+	const { t } = useTranslation();
 	const [user, loading] = useAuthState(auth);
 	const [profile] = useOnGet(users, auth.currentUser?.uid ?? "");
 
@@ -50,7 +52,7 @@ const Navbar: React.FC<NavbarProperties> = ({
 			</RouterLink>
 			<ActionableContent>
 				<Links>
-					<RouterLink to="/events">Events</RouterLink>
+					<RouterLink to="/events">{t("navbar.links.events")}</RouterLink>
 				</Links>
 				<Actions>
 					<Link
@@ -93,7 +95,7 @@ const Navbar: React.FC<NavbarProperties> = ({
 									</Popover.Item>
 									<Popover.Item>
 										<Button type="secondary" onClick={onLogoutClick}>
-											Logout
+											{t("navbar.buttons.logout")}
 										</Button>
 									</Popover.Item>
 								</>
@@ -113,7 +115,7 @@ const Navbar: React.FC<NavbarProperties> = ({
 							auto
 							onClick={onLoginClick}
 						>
-							Login
+							{t("navbar.buttons.login")}
 						</Button>
 					)}
 				</Actions>

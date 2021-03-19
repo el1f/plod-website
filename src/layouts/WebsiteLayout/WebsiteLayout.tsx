@@ -8,7 +8,9 @@ import {
 	useToasts,
 } from "@geist-ui/react";
 import React, { FormEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 
+import Footer from "../../components/Footer";
 import { Navbar } from "../../components/Navbar";
 import { analytics, auth } from "../../config/firebase";
 import { AuthForm, Layout } from "./styles";
@@ -20,6 +22,7 @@ export interface WebsiteLayoutProperties {
 const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 	children,
 }: WebsiteLayoutProperties) => {
+	const { t } = useTranslation();
 	const [isSignin, setIsSignin] = useState(true);
 	const [isSigningIn, setIsSigningIn] = useState(false);
 	const [, setToast] = useToasts();
@@ -37,12 +40,12 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 
 				setToast({
 					type: "success",
-					text: "Welcome to the club man",
+					text: t("navbar.notifications.info.login"),
 				});
 			} catch {
 				setToast({
 					type: "error",
-					text: "There was an error with your login. Try again",
+					text: t("navbar.notifications.error.login"),
 				});
 			}
 		} else {
@@ -56,12 +59,12 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 
 				setToast({
 					type: "success",
-					text: "Welcome to the club man",
+					text: t("navbar.notifications.info.welcome"),
 				});
 			} catch {
 				setToast({
 					type: "error",
-					text: "There was an error creating your account. Try again",
+					text: t("navbar.notifications.error.signup"),
 				});
 			}
 		}
@@ -75,7 +78,7 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 
 		setToast({
 			type: "success",
-			text: "Godspeed rider! See you later.",
+			text: t("navbar.notifications.info.signout"),
 		});
 	}
 
@@ -86,25 +89,32 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 				onLogoutClick={handleLogout}
 			/>
 			{children}
+			<Footer />
 
 			<Modal {...bindings}>
 				<Modal.Title>
-					{isSignin ? "Ready to shred." : "Welcome fella!"}
+					{t(`navbar.${isSignin ? "loginDialog" : "signupDialog"}.title`)}
 				</Modal.Title>
 				<Modal.Subtitle>
-					{isSignin
-						? "Welcome home rider. Insert your creds to access"
-						: "Time to join the steeziest group of riders in all of Italy!"}
+					{t(`navbar.${isSignin ? "loginDialog" : "signupDialog"}.description`)}
 				</Modal.Subtitle>
 
 				<Spacer y={2} />
 				<Modal.Content>
 					<AuthForm onSubmit={handleSubmit}>
-						<Input width="100%" placeholder="Email" {...emailBindings} />
+						<Input
+							width="100%"
+							placeholder={t(
+								`navbar.${isSignin ? "loginDialog" : "signupDialog"}.email`,
+							)}
+							{...emailBindings}
+						/>
 						<Spacer y={0.5} />
 						<Input.Password
 							width="100%"
-							placeholder="Password"
+							placeholder={t(
+								`navbar.${isSignin ? "loginDialog" : "signupDialog"}.password`,
+							)}
 							{...pwdBindings}
 						/>
 						<Spacer y={1} />
@@ -114,11 +124,11 @@ const WebsiteLayout: React.FC<WebsiteLayoutProperties> = ({
 							loading={isSigningIn}
 							auto
 						>
-							{isSignin ? "Let' go!" : "Let me in!"}
+							{t(`navbar.${isSignin ? "loginDialog" : "signupDialog"}.submit`)}
 						</Button>
 						<Spacer y={0.5} />
 						<Button ghost auto onClick={() => setIsSignin(!isSignin)}>
-							{isSignin ? "Create an account" : "I already have an account"}
+							{t(`navbar.${isSignin ? "loginDialog" : "signupDialog"}.swap`)}
 						</Button>
 					</AuthForm>
 				</Modal.Content>
