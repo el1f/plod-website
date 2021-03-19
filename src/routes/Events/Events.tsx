@@ -4,6 +4,7 @@ import { useOnQuery as useFirebaseQuery } from "@typesaurus/react";
 import { formatISO } from "date-fns";
 import firebase from "firebase";
 import React, { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { collection, where } from "typesaurus";
 
 import EventCard, { EventCardSkeleton } from "../../components/EventCard";
@@ -20,6 +21,7 @@ const eventsPartecipations = collection<FirestoreEventPartecipation>(
 );
 
 const Events: React.FC = () => {
+	const { t } = useTranslation();
 	const [, setToast] = useToasts();
 
 	const now = useMemo(() => formatISO(new Date()), []);
@@ -88,7 +90,7 @@ const Events: React.FC = () => {
 			if (!user)
 				return setToast({
 					type: "error",
-					text: `You have to login to be able to check into events!`,
+					text: t("events.notifications.error.loginRequired"),
 				});
 
 			const authUser = await firestore.collection("users").doc(user.uid).get();
@@ -123,29 +125,40 @@ const Events: React.FC = () => {
 				setToast({
 					type: "success",
 					text: isPresent
-						? "That's a bummer... Hope to see you in the next one!"
-						: "Looking forward to seeing you there rider!",
+						? t("events.notifications.info.addedPresence")
+						: t("events.notifications.info.removedPresence"),
 				});
 			} catch {
 				setToast({
 					type: "error",
-					text: `There was an error signing you ${
-						isPresent ? "out of" : "up to"
-					} this event. Try again!`,
+					text: t("events.notifications.error.presenceAdd", {
+						presence: isPresent ? "out of" : "up to",
+					}),
 				});
 			}
 		},
-		[setToast],
+		[setToast, t],
 	);
 
 	return (
 		<Layout>
-			<Text h1>Events</Text>
+			<Text h1>{t("events.title")}</Text>
 			{error && (
 				<>
 					<Note type="error">{error.message}</Note>
 					<Spacer y={1} />
 				</>
+			)}
+			{!(loading || eventsPartecipationsLoading) && events.length === 0 && (
+				<AlertCard>
+					<Text h2 size={80}>
+						<span role="img" aria-label="Sad Face">
+							😢
+						</span>
+					</Text>
+					<Text h2>{t("events.noEvents.title")}</Text>
+					<Text>{t("events.noEvents.details")}</Text>
+				</AlertCard>
 			)}
 			<EventsCarousel>
 				{(loading || eventsPartecipationsLoading) && (
@@ -153,21 +166,6 @@ const Events: React.FC = () => {
 						<EventCardSkeleton />
 						<EventCardSkeleton />
 					</>
-				)}
-				{!(loading || eventsPartecipationsLoading) && events.length === 0 && (
-					<AlertCard>
-						<Text h2 size={80}>
-							<span role="img" aria-label="Sad Face">
-								😢
-							</span>
-						</Text>
-						<Text h2>No events incoming fella...</Text>
-						<Text>
-							{`There are no events incoming in the foreseable future my friend.
-							We're working very hard to keep the scene moving but the Covid
-							situation definitely doesn't help... Check out our social channels to stay posted on any updates.`}
-						</Text>
-					</AlertCard>
 				)}
 				{events
 					.filter((event) => Boolean(event.spot))

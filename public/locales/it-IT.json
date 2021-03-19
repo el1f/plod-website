@@ -1,0 +1,108 @@
+{
+    "general": {
+        "brand": "Padova Longboard"
+    },
+    "navbar": {
+        "links": {
+            "events": "Eventi"
+        },
+        "buttons": {
+            "login": "Login",
+            "logout": "Logout"
+        },
+        "loginDialog": {
+            "title": "Pronti a shreddare?",
+            "description": "Bentornato a casa rider. Inserisci le tue credenziali qui per accedere",
+            "email": "Email",
+            "password": "Password",
+            "submit": "Let's Go!",
+            "swap": "Crea un account"
+        },
+        "signupDialog": {
+            "title": "Benvenuti ragazzi!",
+            "description": "Tempo di unirsi alla famiglia di rider piu' steezy d'Italia!",
+            "email": "Email",
+            "password": "Password",
+            "submit": "Fammi entrare!",
+            "swap": "Ho gia' un account"
+        }
+    },
+    "profile": {
+        "share": "Condividi",
+        "shareText": "Dai un occhiata al mio profilo su Padova Longboard!",
+        "shareDataTitle": "{{firstName}} {{lastName}} AKA {{alias}}",
+        "shareDataText": "Padova Longboarding rider profile - Riding for {{crew}}",
+        "shareDialog": {
+            "title": "Condividi lo stile",
+            "description": "Condividi il tuo profilo di rider con chiunque tu voglia, in ogni modo che vuoi!",
+            "shareWith": "Condividi con..."
+        },
+        "notifications": {
+            "error": {
+                "navigatorShareError": "C'e' stato un errore nel condividere il tuo profilo. Questo potrebbe essere dovuto dall'incompatibilita' del tuo browser o dispositivo con questa funzionalita'. Riprova o copia l'URL."
+            },
+            "info": {
+                "clipboardCopy": "Il link al tuo profilo e' stato copiato!"
+            }
+        }
+    },
+    "events": {
+        "title": "Eventi",
+        "noEvents": {
+            "title": "Nessun evento in arrivo...",
+            "details": "Non ci sono eventi nel futuro prossimo purtroppo. Stiamo lavorando veramente duro per tenere la scena attiva con tutte le complessita' che derivano da questo momento storico... Vienici a trovare nei nostri canali social e su Discord per restare sempre aggiornato."
+        },
+        "eventCard": {
+            "addToGoogleCalendar": "Aggiungi a Google Calendar",
+            "hosted": "OSPITATO DA",
+            "partecipants": "PARTECIPANTI",
+            "more": "Altri {{count}}",
+            "nobody": "Nessuno",
+            "coming": "Vengo anche io!",
+            "notComing": "Non vengo piu'!"
+        },
+        "notifications": {
+            "error": {
+                "presenceAdd": "C'e' stato un errore nel registrarti {{presence}} questo evento. Riprova!",
+                "loginRequired": "Devi effettuare l'accesso per iscriverti ad un evento!"
+            },
+            "info": {
+                "addedPresence": "Fantastico! Ti aspettiamo li'!",
+                "removedPresence": "Che peccato... Speriamo di vederti al prossimo evento!"
+            }
+        }
+    },
+    "onboarding": {
+        "title": "Iniziamo!",
+        "subtitle": "Benvenuto in Padova Longboard! Il gruppo di longboarder piu' figo che puoi trovare nei tuoi paraggi! Abbiamo verificato con il nostro team legale per essere sicuri di poter esprimere tale affermazione ma ci siamo ricordati di non avere un team legale, quindi per ora abbiamo deciso di continuare a farlo!",
+        "presentation": "Avremo bisogno di un paio di informazioni per registrarti all'interno dei nostri eventi etc, Speriamo tu sia pronto/a",
+        "basicsTitle": "Gli essenziali",
+        "firstName": "Nome",
+        "lastName": "Cognome",
+        "profileTitle": "E come vuoi essere chiamato/a?",
+        "alias": "Alias",
+        "avatarTitle": "Facci vedere come sei fatto/a!",
+        "avatarCardTitle": "Il tuo avatar",
+        "avatarCardDesc": "Clicca sulla card per caricare una tua foto!",
+        "crewsTitle": "Sei parte di una di queste crew?",
+        "crewsMember": "Membro",
+        "crewsMain": "Crew principale",
+        "submit": "Fammi entrare!",
+        "notifications": {
+            "error": {
+                "missingFields": "Non hai riempito i seguenti campi:",
+                "general": "C'e' stato un errore nell' aggiornare il tuo profilo, riprova."
+            },
+            "info": {
+                "startUpload": "Stiamo caricando la tua foto profilo. Quest'operazione potrebbe richiedere un po' di tempo, prenditi pure un caffe' nell'attesa",
+                "finishUpload": "Il tuo avatar e' stato caricato con successo! Ora finiamo di sistemare il resto del tuo profilo.",
+                "userCreated": "Abbiamo terminato il setup del tuo profilo, benvenuto/a a bordo!"
+
+            }
+        }
+    },
+    "footer": {
+        "legalHeader": "Cose legali",
+        "privacyPolicy": "Privacy Policy"
+    }
+}

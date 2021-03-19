@@ -10,6 +10,7 @@ import {
 } from "@geist-ui/react";
 import { add, format, getDate, parseISO } from "date-fns";
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { LocationIcon } from "../../config/icons";
 import {
@@ -61,6 +62,8 @@ const EventCard: React.FC<EventCardProperties> = ({
 	isPresent = false,
 	onPartecipationClick,
 }: EventCardProperties) => {
+	const { t } = useTranslation();
+
 	const avatarCount = 8;
 	const morePresenceCount = 5;
 	const dateObject = parseISO(date);
@@ -111,7 +114,7 @@ const EventCard: React.FC<EventCardProperties> = ({
 									)}`}
 									target="_blank"
 								>
-									Add to Google Calendar
+									{t("events.eventCard.addToGoogleCalendar")}
 								</Link>
 							</Popover.Item>
 						</>
@@ -151,7 +154,7 @@ const EventCard: React.FC<EventCardProperties> = ({
 				{hosts.length > 0 && (
 					<PartecipantGroup>
 						<Description
-							title="HOSTED BY"
+							title={t("events.eventCard.hosted")}
 							content={
 								<Avatar.Group>
 									{hosts.map(({ name, photo }) => (
@@ -166,7 +169,7 @@ const EventCard: React.FC<EventCardProperties> = ({
 				)}
 				<PartecipantGroup>
 					<Description
-						title="PARTECIPANTS"
+						title={t("events.eventCard.partecipants")}
 						content={
 							partecipants.length > 0 ? (
 								<Avatar.Group>
@@ -186,10 +189,12 @@ const EventCard: React.FC<EventCardProperties> = ({
 													))}
 												{
 													<li>
-														Altri +
-														{partecipantsCount -
-															avatarCount -
-															morePresenceCount}
+														{t("events.eventCard.more", {
+															count:
+																partecipantsCount -
+																avatarCount -
+																morePresenceCount,
+														})}
 													</li>
 												}
 											</ul>
@@ -201,14 +206,14 @@ const EventCard: React.FC<EventCardProperties> = ({
 									</Tooltip>
 								</Avatar.Group>
 							) : (
-								"Nobody"
+								t("events.eventCard.nobody")
 							)
 						}
 					/>
 				</PartecipantGroup>
 				<Actions>
 					<Button type="secondary" onClick={onPartecipationClick}>
-						{isPresent ? `I'm not coming anymore!` : `I'm coming too!`}
+						{t(`events.eventCard.${isPresent ? "notComing" : "coming"}`)}
 					</Button>
 				</Actions>
 			</Content>

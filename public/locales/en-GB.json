@@ -1,0 +1,118 @@
+{
+    "general": {
+        "brand": "Padova Longboard"
+    },
+    "navbar": {
+        "links": {
+            "events": "Events"
+        },
+        "buttons": {
+            "login": "Login",
+            "logout": "Logout"
+        },
+        "loginDialog": {
+            "title": "Ready To Shred.",
+            "description": "Welcome home rider. Insert your creds here to access",
+            "email": "Email",
+            "password": "Password",
+            "submit": "Let's Go!",
+            "swap": "Create an account"
+        },
+        "signupDialog": {
+            "title": "Welcome Fella!",
+            "description": "Time to join the steeziest group of riders in all of Italy!",
+            "email": "Email",
+            "password": "Password",
+            "submit": "Let Me in!",
+            "swap": "I already have an account"
+        },
+        "notifications": {
+            "error": {
+                "login": "There was an error with your login. Try again",
+                "signup": "There was an error creating your account. Try again"
+            },
+            "info": {
+                "welcome": "Welcome to the club man",
+                "signout": "Godspeed rider! See you later."
+            }
+        }
+    },
+    "profile": {
+        "share": "Share",
+        "shareText": "Check my Rider Profile on Padova Longboard!",
+        "shareDataTitle": "{{firstName}} {{lastName}} AKA {{alias}}",
+        "shareDataText": "Padova Longboarding rider profile - Riding for {{crew}}",
+        "shareDialog": {
+            "title": "Share the Steeze",
+            "description": "Share your rider profile with whomever you want, however you want!",
+            "shareWith": "Share with..."
+        },
+        "notifications": {
+            "error": {
+                "navigatorShareError": "There was an error while sharing your profile. This can be caused by your browers or device not supporting this functionality. Try again or copy the URL."
+            },
+            "info": {
+                "clipboardCopy": "Your link has been successfully copied!"
+            }
+        }
+    },
+    "events": {
+        "title": "Events",
+        "noEvents": {
+            "title": "No events incoming fella...",
+            "details": "There are no events incoming in the foreseable future my friend. We're working very hard to keep the scene moving but the Covid situation definitely doesn't help... Check out our social channels to stay posted on any updates."
+        },
+        "eventCard": {
+            "addToGoogleCalendar": "Add to Google Calendar",
+            "hosted": "HOSTED BY",
+            "partecipants": "PARTECIPANTS",
+            "more": "More {{count}}",
+            "nobody": "Nobody",
+            "coming": "I'm coming too!",
+            "notComing": "I'm not coming anymore!"
+        },
+        "notifications": {
+            "error": {
+                "presenceAdd": "There was an error signing you {{presence}} this event. Try again!",
+                "loginRequired": "You have to login to be able to check into events!"
+            },
+            "info": {
+                "addedPresence": "Looking forward to seeing you there rider!",
+                "removedPresence": "That's a bummer... Hope to see you in the next one!"
+            }
+        }
+    },
+    "onboarding": {
+        "title": "Let's get started!",
+        "subtitle": "Welcome to Padova Longboard! The coolest group of longboarders you can find around you! We checked to make sure that we can make such a statement and we're still not sure we can but whatever!",
+        "presentation": "We're going to need a couple pieces of information on you to be able to sign you up to our events and stuff! Hope you're ready!",
+        "basicsTitle": "The basics",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "profileTitle": "And how should WE call you?",
+        "alias": "Alias",
+        "avatarTitle": "Show us how you look!",
+        "avatarCardTitle": "Your avatar",
+        "avatarCardDesc": "Click this card to pick your avatar!",
+        "crewsTitle": "Are you part of one of our crews?",
+        "crewsMember": "Member",
+        "crewsMain": "Main Crew",
+        "submit": "Get me in!",
+        "notifications": {
+            "error": {
+                "missingFields": "You haven't filled the following fields:",
+                "general": "There was an error updating your profile. Try again please!"
+            },
+            "info": {
+                "startUpload": "Starting the upload of your profile picture. This could take a while so please grab a cupo of coffee and wait.",
+                "finishUpload": "Your avatar has been successfully uploaded! Now let's get the rest of your profile setup.",
+                "userCreated": "We got your user set up! Welcome to the gang my friend."
+
+            }
+        }
+    },
+    "footer": {
+        "legalHeader": "Legal",
+        "privacyPolicy": "Privacy Policy"
+    }
+}

@@ -3,6 +3,8 @@ import { CssBaseline, GeistProvider, Themes } from "@geist-ui/react";
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components/macro";
 
+import "./config/internationalization";
+
 import { apolloClient } from "./config/apollo";
 import Routes from "./routes";
 
